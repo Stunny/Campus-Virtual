@@ -10,4 +10,14 @@
     tools:context="com.stunny.vogel.campusvirtual.WelcomeActivity">
 
     
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/logo"
+        android:text="@string/app_name"/>
+    
 </RelativeLayout>
