@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Campus Virtual</string>
-
+    <string name="app_name">Digital Campus</string>
+    <!-- Icono de la aplicacion utilizando la fuente Octicons. Icono de Repo Clone -->
+    <string name="app_icon">f04c</string>
 </resources>
