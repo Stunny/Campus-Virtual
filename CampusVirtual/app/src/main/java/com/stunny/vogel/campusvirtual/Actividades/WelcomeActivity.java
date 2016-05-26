@@ -10,7 +10,12 @@ import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class WelcomeActivity extends AppCompatActivity {
+
+    private static final long WELCOME_ACTIVITY_DELAY = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +36,25 @@ public class WelcomeActivity extends AppCompatActivity {
         ImageView logo = (ImageView)findViewById(R.id.logo);
         logo.setImageResource(R.mipmap.ic_launcher);
 
+        //--Tras 2 segundos de espera mandamos al usuario a la pantalla de login--//
+
+        TimerTask delay = new TimerTask() {
+            @Override
+            public void run() {
+                //--Accion de enviar a la siguiente actividad--//
+                Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        };
+
+        //--Declaro un tempoorizador para retrasar el intent
+        Timer timer = new Timer();
+        timer.schedule(delay, WELCOME_ACTIVITY_DELAY);
 
     }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
-        try {
-            Thread.sleep(2000);
-            startActivity(i);
-            finish();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
+
 
 
 }
