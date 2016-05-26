@@ -8,9 +8,14 @@
 
     <string name="auth">Autenticación</string>
     <string name="em">Email</string>
-    <string name="pass">Password</string>
+    <string name="pass">Contraseña</string>
     <string name="log">Entra</string>
     <string name="wrong_email">Email incorrecto</string>
     <string name="wrong_pass">Contraseña incorrecta</string>
+
+    <string name="nuevoEstudiante">Crear Alumno</string>
+    <string name="nuevaAsignatura">Crear Asignatura</string>
+    <string name="nuevoExamen">Nuevo Examen</string>
+    <string name="salir">Salir</string>
 
 </resources>

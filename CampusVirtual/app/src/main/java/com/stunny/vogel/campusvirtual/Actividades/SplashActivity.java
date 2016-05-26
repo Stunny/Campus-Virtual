@@ -1,26 +1,23 @@
 package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private static final long WELCOME_ACTIVITY_DELAY = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_splash);
 
         //--Hacemos que la actividad de bienvenida se muestre en pantalla completa.--//
         getSupportActionBar().hide();
@@ -35,7 +32,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //--Accion de enviar a la siguiente actividad--//
-                Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
+                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }
