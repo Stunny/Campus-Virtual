@@ -10,5 +10,7 @@
     <string name="em">Email</string>
     <string name="pass">Password</string>
     <string name="log">Entra</string>
+    <string name="wrong_email">Email incorrecto</string>
+    <string name="wrong_pass">Contraseña incorrecta</string>
 
 </resources>
