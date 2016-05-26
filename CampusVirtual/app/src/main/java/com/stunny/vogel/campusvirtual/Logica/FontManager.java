@@ -13,7 +13,7 @@ public class FontManager {
 
 
     public static final String ROOT = "fonts/",
-    OCTICONS = ROOT + "octicons-local.ttf",
+    OCTICONS = ROOT + "octicons.ttf",
     MATERIAL_ICONS = ROOT + "materialdesignicons-webfont.ttf",
     FONT_AWESOME = ROOT + "fontawesome-webfont.ttf";
 

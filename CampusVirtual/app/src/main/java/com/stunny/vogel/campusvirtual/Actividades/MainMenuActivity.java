@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.FontManager;
 import com.stunny.vogel.campusvirtual.R;
@@ -19,8 +23,49 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
 
+        //--Asignación de iconos--//
+        TextView subjectIcon = (TextView) findViewById(R.id.manageSubject_icon),
+                studentsIcon = (TextView) findViewById(R.id.manageStudents_icon),
+                examsIcon = (TextView) findViewById(R.id.exams_icon),
+                logoutIcon = (TextView) findViewById(R.id.logout_icon);
+
+        Typeface fa = FontManager.getTypeface(getApplicationContext(), FontManager.FONT_AWESOME);
+        FontManager.markAsIconContainer(studentsIcon, fa);
+        FontManager.markAsIconContainer(subjectIcon, fa);
+        FontManager.markAsIconContainer(examsIcon, fa);
+        FontManager.markAsIconContainer(logoutIcon, fa);
+
+        //--Listeners de las opciones del menu principal--//
+        setMenuListeners();
 
 
+    }
+
+    public void setMenuListeners(){
+        findViewById(R.id.manageSubject).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.manageStudents).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.exams).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
