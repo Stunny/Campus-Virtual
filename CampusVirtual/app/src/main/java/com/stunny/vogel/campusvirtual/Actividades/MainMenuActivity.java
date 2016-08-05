@@ -1,15 +1,14 @@
 package com.stunny.vogel.campusvirtual.Actividades;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.FontManager;
@@ -22,6 +21,9 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo);
 
         //--Asignación de iconos--//
         TextView subjectIcon = (TextView) findViewById(R.id.manageSubject_icon),
@@ -45,25 +47,30 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.manageSubject).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(MainMenuActivity.this, SubjectsActivity.class);
+                startActivity(i);
             }
         });
         findViewById(R.id.manageStudents).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent();
+                //startActivity(i);
             }
         });
         findViewById(R.id.exams).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent();
+                //startActivity(i);
             }
         });
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(MainMenuActivity.this, LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
             }
         });
     }
@@ -72,7 +79,7 @@ public class MainMenuActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
 
         MenuInflater mi = getMenuInflater();
-        mi.inflate(R.menu.action_bar_menu, menu);
+        mi.inflate(R.menu.main_menu_action_bar_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
 
@@ -95,7 +102,8 @@ public class MainMenuActivity extends AppCompatActivity {
                 return true;
 
             case R.id.quit:
-
+                finish();
+                System.exit(0);
                 return true;
 
             default:

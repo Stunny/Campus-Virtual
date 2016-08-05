@@ -39,6 +39,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause(){
+        finish();
+        System.exit(0);
+    }
+
     public void login() {
 
         EditText _emailInput = (EditText) findViewById(R.id.email_input);
@@ -96,8 +102,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent i = new Intent(LoginActivity.this, MainMenuActivity.class);
         startActivity(i);
-
-        finish();
     }
 
     public void onLoginFailed(ProgressDialog pd) {

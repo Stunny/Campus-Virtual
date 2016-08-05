@@ -21,9 +21,15 @@
     <string name="nuevaAsignatura">Crear Asignatura</string>
     <string name="nuevoExamen">Nuevo Examen</string>
     <string name="salir">Salir</string>
-    <!--Iconos-->
+    <!--Iconos/FA-->
     <string name="subject">&#xf02d;</string>
     <string name="student">&#xf0c0;</string>
     <string name="exam">&#xf0f6;</string>
     <string name="logout">&#xf08b;</string>
+    <string name="trash">&#xf014;</string>
+    <string name="add">&#xf196;</string>
+    <!--Gestion de asignaturas-->
+    <string name="subjectMenu">Gestion asignaturas</string>
+    <string name="addSubject">Añadir Asignatura</string>
+    <string name="selectSubject">Selecciona una asignatura</string>
 </resources>
