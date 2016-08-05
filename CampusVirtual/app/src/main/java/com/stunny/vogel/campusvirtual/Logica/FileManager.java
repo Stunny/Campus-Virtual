@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Subject;
 
 import java.io.FileNotFoundException;
@@ -33,7 +34,16 @@ public class FileManager {
         return false;
     }
 
+    public boolean createExamsFile(Context context){
+
+        return false;
+    }
+
     public List<Subject> fillSubjects(List<Subject> elements){
+
+        return elements;
+    }
+    public List<Exam> fillExams(List<Exam> elements){
 
         return elements;
     }
