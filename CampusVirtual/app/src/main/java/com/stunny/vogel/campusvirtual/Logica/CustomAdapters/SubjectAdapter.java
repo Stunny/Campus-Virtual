@@ -36,4 +36,13 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         elements = fm.fillSubjects(elements);
     }
 
+    @Override
+    public int getCount(){
+        return elements.size();
+    }
+
+    @Override
+    public Subject getItem(int pos){
+        return elements.get(pos);
+    }
 }

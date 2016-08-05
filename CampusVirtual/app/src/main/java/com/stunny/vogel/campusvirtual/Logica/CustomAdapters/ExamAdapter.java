@@ -36,4 +36,13 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
         elements = fm.fillExams(elements);
     }
 
+    @Override
+    public int getCount(){
+        return elements.size();
+    }
+
+    @Override
+    public Exam getItem(int pos){
+        return elements.get(pos);
+    }
 }
