@@ -29,7 +29,7 @@ public class SubjectsActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.logo);
 
         SubjectAdapter s = new SubjectAdapter(getApplicationContext());
-        ListView l = (ListView) findViewById(R.id.seleccionaAsignatura);
+        ListView l = (ListView) findViewById(R.id.subjectList);
         l.setAdapter(s);
     }
 

@@ -1,7 +1,16 @@
 package com.stunny.vogel.campusvirtual.Logica.CustomAdapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Subject;
@@ -18,31 +27,82 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
 
     private List<Subject> elements;
     private File subjectsFile;
+    private FileManager fm;
 
     public SubjectAdapter(Context context){
         super(context, R.layout.subject);
-        this.elements = new ArrayList<>();
+        this.fm = new FileManager();
+        this.elements = new ArrayList<Subject>();
         this.subjectsFile = new File("subjects.json");
+        Log.d("tag","RELLENANDO LISTA");
         populateList();
     }
 
     private void populateList(){
-        FileManager fm = new FileManager();
 
         if(!this.subjectsFile.exists()){
+            Log.d("tag", "Creo archivo");
             fm.createSubjectsFile(getContext());
         }
 
-        elements = fm.fillSubjects(elements);
+        elements = fm.fillSubjects(elements, getContext());
     }
 
     @Override
     public int getCount(){
-        return elements.size();
+        Log.d("tag", "HACIENDO UN GETCOUNT");
+        return this.elements.size();
     }
 
     @Override
     public Subject getItem(int pos){
         return elements.get(pos);
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent){
+
+        View row = convertView;
+        if (row == null) {
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(R.layout.subject, null);
+
+            row.setClickable(true);
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent();
+                    //startActivity(i); Go to subject page
+                }
+            });
+        }
+
+        TextView titulo = (TextView) row.findViewById(R.id.titulo_asignatura),
+                desc = (TextView) row.findViewById(R.id.desc_asignatura);
+
+        titulo.setText(elements.get(position).name);
+        desc.setText(elements.get(position).description);
+        //SET FOTO
+
+        Button delete = (Button)row.findViewById(R.id.deleteSubject);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Eliminar Asignatura")
+                        .setMessage("¿Está seguro de que desea suprimir esta asignatura?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.removeSubject(elements.get(position));
+                                elements.remove(position);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface()).show();
+            }
+        });
+
+        return row;
     }
 }

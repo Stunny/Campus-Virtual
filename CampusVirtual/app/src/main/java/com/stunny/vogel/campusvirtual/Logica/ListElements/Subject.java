@@ -10,10 +10,11 @@ public class Subject {
     public String description;
     public String iconPath;
     public ArrayList<String> themes;
-    public ArrayList<Student> students;
+    public ArrayList<String> students;
 
     public Subject(){
         this.themes = new ArrayList<>();
         this.students = new ArrayList<>();
     }
+
 }

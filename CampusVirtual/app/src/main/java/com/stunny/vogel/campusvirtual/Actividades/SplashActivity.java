@@ -1,6 +1,7 @@
 package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -18,6 +19,13 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences(getPackageName()+"_preferences", MODE_PRIVATE);
+        final boolean session;
+
+        if(!prefs.contains("logeado")) session = false;
+        else{
+            session = prefs.getBoolean("logeado",false);
+        }
 
         //--Hacemos que la actividad de bienvenida se muestre en pantalla completa.--//
         getSupportActionBar().hide();
@@ -31,10 +39,16 @@ public class SplashActivity extends AppCompatActivity {
         TimerTask delay = new TimerTask() {
             @Override
             public void run() {
-                //--Accion de enviar a la siguiente actividad--//
-                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
+                Intent i;
+                if(session){
+                    i = new Intent(SplashActivity.this, MainMenuActivity.class);
+                    startActivity(i);
+                    finish();
+                }else {
+                    i = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         };
 

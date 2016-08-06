@@ -7,8 +7,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/asignatura"
-        android:background="#EEE">
+        android:id="@+id/asignatura">
 
         <RelativeLayout
             android:layout_width="75dp"
@@ -34,13 +33,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:textColor="#000"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:id="@+id/titulo_asignatura" />
             <TextView
                 android:textAlignment="center"
+                android:textColor="#000"
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/desc_asignatura"/>
@@ -48,6 +51,7 @@
         </LinearLayout>
         <Button
             android:layout_alignParentRight="true"
+            android:id="@+id/deleteSubject"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="false"

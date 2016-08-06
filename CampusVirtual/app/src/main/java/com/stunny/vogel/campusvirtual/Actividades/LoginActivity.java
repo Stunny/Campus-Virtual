@@ -2,6 +2,7 @@ package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -99,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         Button _loginButton = (Button) findViewById(R.id.btn_log);
         _loginButton.setEnabled(true);
-
+        startSession();
         Intent i = new Intent(LoginActivity.this, MainMenuActivity.class);
         startActivity(i);
     }
@@ -144,6 +145,11 @@ public class LoginActivity extends AppCompatActivity {
 
         return ok;
 
+    }
+
+    private void startSession(){
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences(getPackageName()+"_preferences", MODE_PRIVATE);
+        prefs.edit().putBoolean("logeado", true).commit();
     }
 
 }

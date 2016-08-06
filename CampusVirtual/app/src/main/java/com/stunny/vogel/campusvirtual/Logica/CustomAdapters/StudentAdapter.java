@@ -1,7 +1,16 @@
 package com.stunny.vogel.campusvirtual.Logica.CustomAdapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.speech.tts.TextToSpeech;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
@@ -18,16 +27,17 @@ public class StudentAdapter extends ArrayAdapter<Student>{
 
     private List<Student> elements;
     private File studentsFile;
+    private FileManager fm;
 
     public StudentAdapter(Context context){
         super(context, R.layout.subject);
+        this.fm = new FileManager();
         this.elements = new ArrayList<>();
         this.studentsFile = new File("students.json");
         populateList();
     }
 
     private void populateList(){
-        FileManager fm = new FileManager();
 
         if(!this.studentsFile.exists()) fm.createStudentsFile(getContext());
 
@@ -42,5 +52,54 @@ public class StudentAdapter extends ArrayAdapter<Student>{
     @Override
     public Student getItem(int pos){
         return elements.get(pos);
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent){
+        View row = convertView;
+        if(row == null){
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(R.layout.student, null);
+
+            row.setClickable(true);
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent();
+                    //startActivity(i); Go to student page
+                }
+            });
+        }
+
+        TextView nombre = (TextView)row.findViewById(R.id.nombre_student),
+                edad = (TextView)row.findViewById(R.id.edad_student),
+                espec = (TextView)row.findViewById(R.id.especialidad_student);
+
+        nombre.setText(elements.get(position).name);
+        edad.setText("Edad: "+Integer.toString(elements.get(position).getAge()));
+        espec.setText("Especialidad: "+elements.get(position).degree);
+
+        //SET FOTO
+
+        Button delete = (Button)row.findViewById(R.id.deleteStudent);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Eliminar Alumno")
+                        .setMessage("¿Está seguro de que desea suprimir este alumno?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                fm.removeStudent(elements.get(position));
+                                elements.remove(position);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
+        });
+
+        return row;
     }
 }

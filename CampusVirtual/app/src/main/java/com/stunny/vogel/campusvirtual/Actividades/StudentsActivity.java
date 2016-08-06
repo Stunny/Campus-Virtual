@@ -34,7 +34,7 @@ public class StudentsActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.logo);
 
         StudentAdapter s = new StudentAdapter(getApplicationContext());
-        ListView l = (ListView)findViewById(R.id.seleccionaAlumno);
+        ListView l = (ListView)findViewById(R.id.studentList);
         l.setAdapter(s);
     }
 

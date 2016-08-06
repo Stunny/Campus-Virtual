@@ -2,6 +2,7 @@ package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences prefs = getApplicationContext().getSharedPreferences(getPackageName()+"_preferences", MODE_PRIVATE);
+                prefs.edit().putBoolean("logeado", false).commit();
                 Intent i = new Intent(MainMenuActivity.this, LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
