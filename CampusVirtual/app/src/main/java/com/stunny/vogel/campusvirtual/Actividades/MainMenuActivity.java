@@ -54,15 +54,15 @@ public class MainMenuActivity extends AppCompatActivity {
         findViewById(R.id.manageStudents).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
-                //startActivity(i);
+                Intent i = new Intent(MainMenuActivity.this, StudentsActivity.class);
+                startActivity(i);
             }
         });
         findViewById(R.id.exams).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
-                //startActivity(i);
+                Intent i = new Intent(MainMenuActivity.this, ExamsActivity.class);
+                startActivity(i);
             }
         });
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {

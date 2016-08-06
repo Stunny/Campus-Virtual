@@ -30,6 +30,13 @@
     <string name="add">&#xf196;</string>
     <!--Gestion de asignaturas-->
     <string name="subjectMenu">Gestion asignaturas</string>
-    <string name="addSubject">Añadir Asignatura</string>
+    <string name="addElement">Nuevo Elemento</string>
     <string name="selectSubject">Selecciona una asignatura</string>
+    <!--Gestion de alumnos-->
+    <string name="selectStudent">Selecciona un alumno</string>
+    <string name="studentMenu">Gestion alumnos</string>
+    <string name="addStudent">Nuevo Alumno</string>
+    <!--Gestion  de examenes-->
+    <string name="examMenu">Listado examenes</string>
+    <string name="addExam">Nuevo Examen</string>
 </resources>

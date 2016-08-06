@@ -2,6 +2,7 @@ package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,43 +11,47 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.stunny.vogel.campusvirtual.Logica.CustomAdapters.SubjectAdapter;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.stunny.vogel.campusvirtual.Logica.CustomAdapters.StudentAdapter;
 import com.stunny.vogel.campusvirtual.R;
 
-public class SubjectsActivity extends AppCompatActivity {
+public class StudentsActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subjects);
+        setContentView(R.layout.activity_students);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_hardware_keyboard_arrow_left);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setSubtitle(R.string.subjectMenu);
+        getSupportActionBar().setSubtitle(R.string.studentMenu);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
 
-        SubjectAdapter s = new SubjectAdapter(getApplicationContext());
-        ListView l = (ListView) findViewById(R.id.seleccionaAsignatura);
+        StudentAdapter s = new StudentAdapter(getApplicationContext());
+        ListView l = (ListView)findViewById(R.id.seleccionaAlumno);
         l.setAdapter(s);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater mi = getMenuInflater();
         mi.inflate(R.menu.list_action_bar_menu, menu);
 
-        return super .onCreateOptionsMenu(menu);
+        return super.onCreateOptionsMenu(menu);
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
@@ -59,4 +64,5 @@ public class SubjectsActivity extends AppCompatActivity {
         }
 
     }
+
 }
