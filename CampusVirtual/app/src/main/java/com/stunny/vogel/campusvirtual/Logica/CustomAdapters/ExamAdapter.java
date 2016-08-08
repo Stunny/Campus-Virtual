@@ -13,7 +13,10 @@ import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,7 +61,7 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
         View row = convertView;
         if(row == null){
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.exam, null);
+            row = inflater.inflate(R.layout.examv2, null);
 
             row.setClickable(true);
             row.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +78,14 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
                 asig = (TextView)row.findViewById(R.id.exam_subject),
                 aula = (TextView)row.findViewById(R.id.exam_aula);
 
-        date.setText(elements.get(position).fecha.toString());
-        hora.setText(elements.get(position).hora.toString());
+        DateFormat form = new SimpleDateFormat("HH:mm");
+        String hour = form.format(elements.get(position).hora);
+
+        hora.setText("Hora: "+hour);
+        form = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = form.format(elements.get(position).fecha);
+
+        date.setText(fecha);
         asig.setText("Asignatura: "+elements.get(position).subject);
         aula.setText(elements.get(position).room);
 

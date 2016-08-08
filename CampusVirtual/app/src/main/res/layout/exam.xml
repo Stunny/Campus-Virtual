@@ -25,12 +25,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:layout_gravity="left"
                     android:textColor="#000"
                     android:id="@+id/exam_fecha"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="0dp"
                     android:id="@+id/exam_hora"
+                    android:layout_gravity="right"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="#000"
@@ -39,6 +41,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
                 android:textSize="14sp"
                 android:textColor="#000"
                 android:id="@+id/exam_subject"
@@ -53,12 +57,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:layout_gravity="left"
                     android:textColor="#000"
                     android:id="@+id/exam_aula"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="0dp"
                     android:id="@+id/exam_students"
+                    android:layout_gravity="right"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="#000"
