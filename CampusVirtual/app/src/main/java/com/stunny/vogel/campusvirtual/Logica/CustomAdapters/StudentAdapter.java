@@ -1,5 +1,6 @@
 package com.stunny.vogel.campusvirtual.Logica.CustomAdapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,9 +29,11 @@ public class StudentAdapter extends ArrayAdapter<Student>{
     private List<Student> elements;
     private File studentsFile;
     private FileManager fm;
+    private Activity activityRef;
 
-    public StudentAdapter(Context context){
+    public StudentAdapter(Context context, Activity ref){
         super(context, R.layout.subject);
+        this.activityRef = ref;
         this.fm = new FileManager();
         this.elements = new ArrayList<>();
         this.studentsFile = new File("students.json");
@@ -86,7 +89,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builderConf = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builderConf = new AlertDialog.Builder(activityRef);
                 builderConf.setTitle("Eliminar alumno");
                 builderConf.setMessage("¿Desea eliminar este alumno?");
                 builderConf.setCancelable(true);

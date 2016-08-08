@@ -1,5 +1,6 @@
 package com.stunny.vogel.campusvirtual.Logica.CustomAdapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,9 +29,11 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
     private List<Subject> elements;
     private File subjectsFile;
     private FileManager fm;
+    private Activity activityRef;
 
-    public SubjectAdapter(Context context){
+    public SubjectAdapter(Context context, Activity ref){
         super(context, R.layout.subject);
+        this.activityRef = ref;
         this.fm = new FileManager();
         this.elements = new ArrayList<Subject>();
         this.subjectsFile = new File("subjects.json");
@@ -89,7 +92,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builderConf = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builderConf = new AlertDialog.Builder(activityRef);
                 builderConf.setMessage("¿Desea eliminar esta asignatura?");
                 builderConf.setTitle("Eliminar Asignatura");
                 builderConf.setCancelable(true);

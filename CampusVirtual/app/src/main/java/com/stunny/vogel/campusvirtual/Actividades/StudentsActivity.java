@@ -33,7 +33,7 @@ public class StudentsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
 
-        StudentAdapter s = new StudentAdapter(getApplicationContext());
+        StudentAdapter s = new StudentAdapter(getApplicationContext(), StudentsActivity.this);
         ListView l = (ListView)findViewById(R.id.studentList);
         l.setAdapter(s);
     }

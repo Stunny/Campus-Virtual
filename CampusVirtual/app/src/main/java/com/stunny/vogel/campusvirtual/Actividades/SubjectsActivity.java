@@ -28,7 +28,7 @@ public class SubjectsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
 
-        SubjectAdapter s = new SubjectAdapter(getApplicationContext());
+        SubjectAdapter s = new SubjectAdapter(getApplicationContext(), SubjectsActivity.this);
         ListView l = (ListView) findViewById(R.id.subjectList);
         l.setAdapter(s);
     }

@@ -33,12 +33,14 @@
                 android:layout_width="match_parent"
                 android:textColor="#000"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:layout_gravity="start"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:id="@+id/nombre_student" />
             <TextView
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:layout_gravity="start"
                 android:layout_marginTop="5dp"
                 android:textColor="#000"
                 android:textSize="14sp"
@@ -46,7 +48,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edad_student"/>
             <TextView
-                android:textAlignment="center"
+                android:textAlignment="textStart"
+                android:layout_gravity="start"
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textColor="#000"
