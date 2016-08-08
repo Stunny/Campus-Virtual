@@ -92,7 +92,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                fm.removeStudent(elements.get(position));
+                                fm.removeStudent(elements.get(position), getContext());
                                 elements.remove(position);
                             }
                         })

@@ -95,7 +95,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                fm.removeSubject(elements.get(position));
+                                fm.removeSubject(elements.get(position), getContext());
                                 elements.remove(position);
                             }
                         })

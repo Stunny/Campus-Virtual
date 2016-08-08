@@ -38,9 +38,8 @@ public class FileManager {
     public boolean createStudentsFile(Context context){
         try {
             FileOutputStream fos = context.openFileOutput("students.json", Context.MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(fos);
-            osw.write(DefaultContent.default_students);
-            osw.close();
+            fos.write(DefaultContent.default_students.getBytes());
+            fos.close();
             return true;
         } catch (IOException e) {
             Toast.makeText(context, "No hay memoria suficiente", LENGTH_SHORT);
@@ -65,9 +64,8 @@ public class FileManager {
     public boolean createExamsFile(Context context){
         try{
             FileOutputStream fos = context.openFileOutput("exams.json", Context.MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(fos);
-            osw.write(DefaultContent.default_exams);
-            osw.close();
+            fos.write(DefaultContent.default_exams.getBytes());
+            fos.close();
             return true;
         }catch(IOException e){
             Toast.makeText(context, "No hay memoria suficiente", LENGTH_SHORT);
@@ -150,9 +148,9 @@ public class FileManager {
                 aux.photoPath = obj.get("photoPath").getAsString();
                 aux.gender = obj.get("gender").getAsString();
                 aux.birthDate = Date.valueOf(
-                        obj.get("birth_year").getAsString()+"-"
-                       +obj.get("birth_month").getAsString()+"-"
-                       +obj.get("birth_day").getAsString()
+                        obj.get("birth_year").getAsString() + "-"
+                                + obj.get("birth_month").getAsString() + "-"
+                                + obj.get("birth_day").getAsString()
                 );
 
                 elements.add(aux);
@@ -164,16 +162,57 @@ public class FileManager {
 
         return elements;
     }
-    public void removeSubject(Subject s){
+    public void removeSubject(Subject s, Context context){
+        try {
+            JsonArray subjects = extract(context.getFilesDir()+"/subjects.json");
+            JsonObject aux;
+            for(int i = 0; i<subjects.size(); i++){
+                aux = (JsonObject)subjects.get(i);
+                if(aux.get("name").getAsString().equals(s.name)){
+                    subjects.remove(i);
+                    reWrite(subjects, context.getFilesDir() + "/subjects.json");
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
 
     }
-    public void removeStudent(Student s){
-
+    public void removeStudent(Student s, Context context){
+        try{
+            JsonArray students = extract(context.getFilesDir()+"/students.json");
+            JsonObject aux;
+            for (int i = 0; i<students.size(); i++){
+                aux = (JsonObject)students.get(i);
+                if(aux.get("name").getAsString().equals(s.name)){
+                    students.remove(i);
+                    reWrite(students, context.getFilesDir()+"/students.json");
+                    break;
+                }
+            }
+            reWrite(students, context.getFilesDir()+"/students.json");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     private JsonArray extract(String file) throws IOException{
         JsonParser parser = new JsonParser();
         JsonArray obj = (JsonArray) parser.parse(new FileReader(file));
 
         return obj;
+    }
+    private void reWrite(JsonArray ja, String path){
+        try {
+            FileOutputStream fos = new FileOutputStream(path, false);
+            fos.write(ja.toString().getBytes());
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException ie){
+            ie.printStackTrace();
+        }
+
     }
 }
