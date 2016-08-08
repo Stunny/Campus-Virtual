@@ -7,8 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/exam"
-        android:background="#EEE">
+        android:id="@+id/exam">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,6 +25,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:textColor="#000"
                     android:id="@+id/exam_fecha"
                     android:layout_weight="1"/>
                 <TextView
@@ -33,12 +33,14 @@
                     android:id="@+id/exam_hora"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:textColor="#000"
                     android:layout_weight="1"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="#000"
                 android:id="@+id/exam_subject"
                 android:layout_marginBottom="5dp"/>
             <LinearLayout
@@ -51,6 +53,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:textColor="#000"
                     android:id="@+id/exam_aula"
                     android:layout_weight="1"/>
                 <TextView
@@ -58,6 +61,7 @@
                     android:id="@+id/exam_students"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:textColor="#000"
                     android:layout_weight="1"/>
             </LinearLayout>
 

@@ -92,6 +92,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
                 AlertDialog.Builder builderConf = new AlertDialog.Builder(getContext());
                 builderConf.setMessage("¿Desea eliminar esta asignatura?");
                 builderConf.setTitle("Eliminar Asignatura");
+                builderConf.setCancelable(true);
 
                 builderConf.setPositiveButton(
                         "Si",

@@ -89,6 +89,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
                 AlertDialog.Builder builderConf = new AlertDialog.Builder(getContext());
                 builderConf.setTitle("Eliminar alumno");
                 builderConf.setMessage("¿Desea eliminar este alumno?");
+                builderConf.setCancelable(true);
 
                 builderConf.setPositiveButton(
                         "Si",
