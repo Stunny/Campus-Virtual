@@ -19,6 +19,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class FileManager {
             osw.close();
             return true;
         } catch (IOException e) {
-            Toast.makeText(context,"No hay memoria suficiente", LENGTH_SHORT);
+            Toast.makeText(context, "No hay memoria suficiente", LENGTH_SHORT);
         }
         return false;
     }
@@ -68,7 +70,7 @@ public class FileManager {
             osw.close();
             return true;
         }catch(IOException e){
-            Toast.makeText(context,"No hay memoria suficiente", LENGTH_SHORT);
+            Toast.makeText(context, "No hay memoria suficiente", LENGTH_SHORT);
         }
         return false;
     }
@@ -79,7 +81,7 @@ public class FileManager {
         JsonObject obj;
 
         try {
-            JsonArray subjects = extract(context.getFilesDir()+"/subjects.json");
+            JsonArray subjects = extract(context.getFilesDir() + "/subjects.json");
             for(int i = 0; i<subjects.size(); i++){
                 aux = new Subject();
                 obj = (JsonObject) subjects.get(i);
@@ -99,11 +101,66 @@ public class FileManager {
 
         return elements;
     }
-    public List<Exam> fillExams(List<Exam> elements){
+    public List<Exam> fillExams(List<Exam> elements, Context context){
+
+        Exam aux;
+        JsonObject obj;
+
+        try{
+
+            JsonArray exams = extract(context.getFilesDir()+"/exams.json");
+            for(int i = 0; i<exams.size(); i++){
+                aux = new Exam();
+                obj = (JsonObject)exams.get(i);
+
+                aux.subject = obj.get("subject_name").getAsString();
+                aux.degree = obj.get("grado").getAsString();
+                aux.fecha = Date.valueOf(
+                        obj.get("año").getAsString() + "-"
+                                + obj.get("mes").getAsString() + "-"
+                                + obj.get("dia").getAsString());
+                aux.hora = Time.valueOf(obj.get("hora").getAsString() + ":"
+                        + obj.get("minuto").getAsString() + ":"
+                        + obj.get("segundo").getAsString());
+                aux.room = obj.get("aula").getAsString();
+
+                elements.add(aux);
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+            return null;
+        }
 
         return elements;
     }
-    public List<Student> fillStudents(List<Student> elements){
+    public List<Student> fillStudents(List<Student> elements, Context context){
+
+        Student aux;
+        JsonObject obj;
+
+        try{
+            JsonArray students = extract(context.getFilesDir()+"/students.json");
+            for(int i = 0; i<students.size(); i++){
+                aux = new Student();
+                obj = (JsonObject)students.get(i);
+
+                aux.name = obj.get("name").getAsString();
+                aux.degree = obj.get("degree").getAsString();
+                aux.photoPath = obj.get("photoPath").getAsString();
+                aux.gender = obj.get("gender").getAsString();
+                aux.birthDate = Date.valueOf(
+                        obj.get("birth_year").getAsString()+"-"
+                       +obj.get("birth_month").getAsString()+"-"
+                       +obj.get("birth_day").getAsString()
+                );
+
+                elements.add(aux);
+            }
+        }catch(IOException ie){
+            ie.printStackTrace();
+            return null;
+        }
 
         return elements;
     }

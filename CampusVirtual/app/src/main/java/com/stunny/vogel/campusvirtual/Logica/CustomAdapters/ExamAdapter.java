@@ -39,7 +39,7 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
             fm.createExamsFile(getContext());
         }
 
-        elements = fm.fillExams(elements);
+        elements = fm.fillExams(elements, getContext());
     }
 
     @Override

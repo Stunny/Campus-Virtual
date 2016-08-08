@@ -41,7 +41,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
 
         if(!this.studentsFile.exists()) fm.createStudentsFile(getContext());
 
-        elements = fm.fillStudents(elements);
+        elements = fm.fillStudents(elements, getContext());
     }
 
     @Override

@@ -99,7 +99,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
                                 elements.remove(position);
                             }
                         })
-                        .setNegativeButton(android.R.string.no, new DialogInterface()).show();
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 

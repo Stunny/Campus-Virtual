@@ -10,10 +10,10 @@ public class Exam {
     public Date fecha;
     public Time hora;
     public String degree;
-    public Subject subject;
+    public String subject;
     public String room;
 
-    public Exam(Subject s){
-        subject = s;
+    public Exam(){
+
     }
 }
