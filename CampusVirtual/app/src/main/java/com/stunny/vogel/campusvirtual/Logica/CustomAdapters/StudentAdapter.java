@@ -86,17 +86,32 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Eliminar Alumno")
-                        .setMessage("¿Está seguro de que desea suprimir este alumno?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builderConf = new AlertDialog.Builder(getContext());
+                builderConf.setTitle("Eliminar alumno");
+                builderConf.setMessage("¿Desea eliminar este alumno?");
+
+                builderConf.setPositiveButton(
+                        "Si",
+                        new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                fm.removeStudent(elements.get(position), getContext());
                                 elements.remove(position);
+                                fm.removeStudent(elements.get(position), getContext());
+                                dialog.cancel();
                             }
-                        })
-                        .setNegativeButton(android.R.string.no, null).show();
+                        }
+                );
+                builderConf.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }
+                );
+                AlertDialog conf = builderConf.create();
+                conf.show();
             }
         });
 

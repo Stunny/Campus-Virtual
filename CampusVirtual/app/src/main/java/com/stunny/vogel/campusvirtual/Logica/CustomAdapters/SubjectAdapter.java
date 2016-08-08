@@ -89,17 +89,33 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Eliminar Asignatura")
-                        .setMessage("¿Está seguro de que desea suprimir esta asignatura?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builderConf = new AlertDialog.Builder(getContext());
+                builderConf.setMessage("¿Desea eliminar esta asignatura?");
+                builderConf.setTitle("Eliminar Asignatura");
+
+                builderConf.setPositiveButton(
+                        "Si",
+                        new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                fm.removeSubject(elements.get(position), getContext());
                                 elements.remove(position);
+                                fm.removeSubject(elements.get(position), getContext());
+                                dialog.cancel();
                             }
-                        })
-                        .setNegativeButton(android.R.string.no, null).show();
+                        }
+                );
+                builderConf.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }
+                );
+
+                AlertDialog conf = builderConf.create();
+                conf.show();
             }
         });
 
