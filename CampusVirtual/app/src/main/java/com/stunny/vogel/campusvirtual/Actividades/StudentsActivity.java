@@ -56,8 +56,8 @@ public class StudentsActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.add:
-                Intent i = new Intent();
-                //startActivity(i);
+                Intent i = new Intent(StudentsActivity.this, AddStudent.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

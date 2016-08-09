@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,8 +90,13 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         desc.setText(elements.get(position).description);
 
         //SET FOTO
+        String imPath = elements.get(position).iconPath;
         ImageView iv = (ImageView) row.findViewById(R.id.icono_asignatura);
-        if(elements.get(position).iconPath.equals("")){
+        File imFile = new File(imPath);
+        if(imFile.exists()){
+            Bitmap bm = BitmapFactory.decodeFile(imFile.getAbsolutePath());
+            iv.setImageBitmap(bm);
+        }else{
             iv.setImageResource(R.drawable.ic_default_subject);
         }
 

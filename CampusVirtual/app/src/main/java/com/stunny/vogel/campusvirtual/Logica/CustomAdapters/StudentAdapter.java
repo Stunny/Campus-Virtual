@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,8 +86,13 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         espec.setText("Especialidad: "+elements.get(position).degree);
 
         //SET FOTO
+        String imPath = elements.get(position).photoPath;
         ImageView iv = (ImageView) row.findViewById(R.id.icono_student);
-        if(elements.get(position).photoPath.equals("")){
+        File imFile = new File(imPath);
+        if(imFile.exists()){
+            Bitmap bm = BitmapFactory.decodeFile(imFile.getAbsolutePath());
+            iv.setImageBitmap(bm);
+        }else{
             iv.setImageResource(R.drawable.ic_default_student);
         }
 

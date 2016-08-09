@@ -33,9 +33,12 @@
     <string name="addElement">Nuevo Elemento</string>
     <string name="selectSubject">Selecciona una asignatura</string>
     <!--Gestion de alumnos-->
+    <string name="stform">Nuevo alumno</string>
     <string name="selectStudent">Selecciona un alumno</string>
     <string name="studentMenu">Gestion alumnos</string>
     <string name="addStudent">Nuevo Alumno</string>
+    <string name="stname">Nombre y apellidos</string>
+    <string name="stbirth">Fecha de nacimiento</string>
     <!--Gestion  de examenes-->
     <string name="examMenu">Listado examenes</string>
     <string name="addExam">Nuevo Examen</string>

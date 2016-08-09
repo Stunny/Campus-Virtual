@@ -93,7 +93,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.new_student:
-
+                Intent i = new Intent(MainMenuActivity.this, AddStudent.class);
+                startActivity(i);
                 return true;
 
             case R.id.new_subject:

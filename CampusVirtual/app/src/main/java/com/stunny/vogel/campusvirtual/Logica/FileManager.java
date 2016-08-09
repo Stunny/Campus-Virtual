@@ -13,7 +13,7 @@ import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Subject;
 
 
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -214,5 +214,14 @@ public class FileManager {
             ie.printStackTrace();
         }
 
+    }
+    public boolean pathChecker(String p){
+        File f = new File(p);
+        try{
+            f.getCanonicalPath();
+            return true;
+        }catch(IOException e){
+            return false;
+        }
     }
 }
