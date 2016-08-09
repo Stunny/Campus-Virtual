@@ -8,8 +8,10 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -29,6 +31,9 @@ public class AddStudent extends AppCompatActivity {
     private DatePickerDialog st_birthPicker;
     private SimpleDateFormat sdf;
     private Spinner sp_Deg;
+    private ImageView st_selectedPhoto;
+    private Button st_selectPhoto,
+                    st_create;
 
     private String name, birthdate, degree, genre, photoPath;
 
@@ -58,7 +63,8 @@ public class AddStudent extends AppCompatActivity {
         sp_Deg.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                degree = (String) parent.getItemAtPosition(position);
+                degree = parent.getSelectedItem().toString();
+                //Toast.makeText(getApplicationContext(), degree, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -85,6 +91,15 @@ public class AddStudent extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), genre, Toast.LENGTH_SHORT).show();
             }
         });
+
+        st_selectedPhoto = (ImageView)findViewById(R.id.st_selectedphoto);
+        st_selectedPhoto.setImageResource(R.drawable.ic_default_student);
+
+        st_selectPhoto = (Button)findViewById(R.id.st_selectphoto);
+        setSelectPhotoListener();
+
+        st_create = (Button)findViewById(R.id.createStudent);
+        setCreateStudentListener();
     }
     private void setSpinAdapter(){
         ArrayAdapter<CharSequence> sa = ArrayAdapter.createFromResource(this,
@@ -105,5 +120,11 @@ public class AddStudent extends AppCompatActivity {
     }
     private void showDatePicker(){
         st_birthPicker.show();
+    }
+    private void setSelectPhotoListener(){
+
+    }
+    private void setCreateStudentListener(){
+
     }
 }

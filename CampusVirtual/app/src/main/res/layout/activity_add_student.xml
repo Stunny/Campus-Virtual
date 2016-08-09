@@ -80,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_toRightOf="@id/strgentag">
                     <RadioButton
@@ -99,7 +100,41 @@
                         android:text="@string/O"/>
                 </RadioGroup>
             </RelativeLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/strphoto"
+                android:textSize="18.5sp"
+                android:layout_marginRight="20dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="30dp">
+                <ImageView
+                    android:id="@+id/st_selectedphoto"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="4dp"/>
+                <Button
+                    android:id="@+id/st_selectphoto"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/stselectphoto"
+                    android:layout_toRightOf="@id/st_selectedphoto"/>
+            </RelativeLayout>
+            <Button
+                android:id="@+id/createStudent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="bottom"
+                android:text="@string/strcreate"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
