@@ -117,7 +117,7 @@ public interface DefaultContent {
             "    \"birth_day\": 2,\n" +
             "    \"birth_month\": 2,\n" +
             "    \"birth_year\": 1992,\n" +
-            "    \"degree\": \"A.D.E,\",\n" +
+            "    \"degree\": \"A.D.E.\",\n" +
             "    \"photoPath\": \"\",\n" +
             "    \"gender\": \"Femenino\"\n" +
             "  },\n" +

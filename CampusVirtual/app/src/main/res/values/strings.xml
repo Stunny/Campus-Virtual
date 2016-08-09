@@ -39,6 +39,19 @@
     <string name="addStudent">Nuevo Alumno</string>
     <string name="stname">Nombre y apellidos</string>
     <string name="stbirth">Fecha de nacimiento</string>
+    <string name="stdeg"> Carrera:</string>
+    <string name="strgGen">Sexo:</string>
+    <string name="M">Hombre</string>
+    <string name="W">Mujer</string>
+    <string name="O">Otro</string>
+    <string-array name="degrees">
+        <item>Informatica</item>
+        <item>Telecomunicaciones</item>
+        <item>Electronica</item>
+        <item>A.D.E.</item>
+        <item>Animacion</item>
+        <item>Multimedia</item>
+    </string-array>
     <!--Gestion  de examenes-->
     <string name="examMenu">Listado examenes</string>
     <string name="addExam">Nuevo Examen</string>
