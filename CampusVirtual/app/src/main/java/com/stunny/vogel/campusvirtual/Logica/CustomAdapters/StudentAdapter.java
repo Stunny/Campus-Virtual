@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
@@ -83,6 +84,10 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         espec.setText("Especialidad: "+elements.get(position).degree);
 
         //SET FOTO
+        ImageView iv = (ImageView) row.findViewById(R.id.icono_student);
+        if(elements.get(position).photoPath.equals("")){
+            iv.setImageResource(R.drawable.ic_default_student);
+        }
 
         Button delete = (Button)row.findViewById(R.id.deleteStudent);
 
@@ -101,6 +106,7 @@ public class StudentAdapter extends ArrayAdapter<Student>{
                             public void onClick(DialogInterface dialog, int which) {
                                 elements.remove(position);
                                 fm.removeStudent(elements.get(position), getContext());
+                                notifyDataSetChanged();
                                 dialog.cancel();
                             }
                         }

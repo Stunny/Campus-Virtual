@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
@@ -85,7 +86,12 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
 
         titulo.setText(elements.get(position).name);
         desc.setText(elements.get(position).description);
+
         //SET FOTO
+        ImageView iv = (ImageView) row.findViewById(R.id.icono_asignatura);
+        if(elements.get(position).iconPath.equals("")){
+            iv.setImageResource(R.drawable.ic_default_subject);
+        }
 
         Button delete = (Button)row.findViewById(R.id.deleteSubject);
 
@@ -104,6 +110,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
                             public void onClick(DialogInterface dialog, int which) {
                                 elements.remove(position);
                                 fm.removeSubject(elements.get(position), getContext());
+                                notifyDataSetChanged();
                                 dialog.cancel();
                             }
                         }
