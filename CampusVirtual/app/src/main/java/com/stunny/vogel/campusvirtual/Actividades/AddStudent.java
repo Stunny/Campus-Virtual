@@ -2,6 +2,16 @@ package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -19,8 +29,12 @@ import android.widget.Toast;
 
 import com.stunny.vogel.campusvirtual.R;
 
+import java.io.File;
+import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class AddStudent extends AppCompatActivity {
@@ -35,7 +49,8 @@ public class AddStudent extends AppCompatActivity {
     private Button st_selectPhoto,
                     st_create;
 
-    private String name, birthdate, degree, genre, photoPath;
+    private String name, birthdate, degree, genre;
+    private Uri outputURI, photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +102,7 @@ public class AddStudent extends AppCompatActivity {
         st_genre.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                genre =(String) ((RadioButton)findViewById(checkedId)).getText();
+                genre = (String) ((RadioButton) findViewById(checkedId)).getText();
                 //Toast.makeText(getApplicationContext(), genre, Toast.LENGTH_SHORT).show();
             }
         });
@@ -122,7 +137,72 @@ public class AddStudent extends AppCompatActivity {
         st_birthPicker.show();
     }
     private void setSelectPhotoListener(){
+        st_selectPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchSelectPhotoIntent();
+            }
+        });
+    }
+    private void launchSelectPhotoIntent(){
+        final File arr = new File(Environment.getExternalStorageDirectory()+File.separator+"dCampusIMG"+File.separator);
+        arr.mkdirs();
+        final String _imgName = "img_"+System.currentTimeMillis()+".jpg";
+        final File _imgDir = new File(arr, _imgName);
+        outputURI = Uri.fromFile(_imgDir);
 
+        //--Capturar imagen desde la camara
+        final List<Intent> cameraIntents = new ArrayList<Intent>();
+        final Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        final PackageManager pm = getPackageManager();
+        final List<ResolveInfo> camlist = pm.queryIntentActivities(captureIntent, 0);
+        for(ResolveInfo ri : camlist){
+            final String packname = ri.activityInfo.packageName;
+            final Intent i = new Intent(captureIntent);
+            i.setComponent(new ComponentName(ri.activityInfo.packageName, ri.activityInfo.name));
+            i.setPackage(packname);
+            i.putExtra(MediaStore.EXTRA_OUTPUT, outputURI);
+            cameraIntents.add(i);
+        }
+
+        //--Capturar imagen desde sistema de archivos
+        final Intent iGal = new Intent();
+        iGal.setType("image/*");
+        iGal.setAction(Intent.ACTION_GET_CONTENT);
+
+        //--Seleccionador de metodo
+        final Intent pickImg = Intent.createChooser(iGal, "Seleccionar fuente");
+
+        //--Añadimos la camara al seleccionador
+        pickImg.putExtra(Intent.EXTRA_INITIAL_INTENTS,
+                cameraIntents.toArray(new Parcelable[cameraIntents.size()]));
+        pickImg.putExtra("crop", "true");
+        pickImg.putExtra("scale", true);
+
+        startActivityForResult(pickImg, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode==RESULT_OK){
+            if(requestCode == 1){
+                final boolean isCamera;
+                if(data==null || data.getData() == null) isCamera = true;
+                else{
+                    final String action = data.getAction();
+                    if(action == null) isCamera = false;
+                    else isCamera = action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
+                }
+                Uri selectedPhotoUri;
+                if(isCamera){
+                    selectedPhotoUri = outputURI;
+                    photoPath = selectedPhotoUri;
+                }
+                else selectedPhotoUri = data == null ? null : data.getData();
+                Bitmap bm = BitmapFactory.decodeFile(selectedPhotoUri.getPath());
+                st_selectedPhoto.setImageBitmap(bm);
+            }
+        }
     }
     private void setCreateStudentListener(){
 
