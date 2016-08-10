@@ -10,6 +10,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -26,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
@@ -248,6 +251,11 @@ public class AddStudent extends AppCompatActivity {
         pd.setIndeterminate(true);
         pd.show();
 
+        if(!validate()){
+            onCreateFailed(pd);
+            return;
+        }
+
         final Student s = new Student();
         s.photoPath = photoPath;
 
@@ -258,12 +266,9 @@ public class AddStudent extends AppCompatActivity {
         s.degree = degree;
         s.name = name;
 
-        if(!validate(s, pd)){
-            onCreateFailed(pd);
-            return;
-        }
-        if(fm.exists(s)){
-
+        if(fm.exists(s, getApplicationContext())){
+            Toast.makeText(getApplicationContext(),
+                    "El alumno ya existe. Puebe a introducir el nombre completo.", Toast.LENGTH_SHORT).show();
             onCreateFailed(pd);
             return;
         }
@@ -276,8 +281,31 @@ public class AddStudent extends AppCompatActivity {
                 }, 3000);
     }
 
-    private boolean validate(Student s, ProgressDialog pd){
+    private boolean validate(){
         boolean ok = true;
+        String nombre = st_name_input.getText().toString();
+        if(nombre.isEmpty() || !nombre.contains(" ")){
+            st_name_input.setError("Introduzca un nombre completo");
+            ok = false;
+        }else{
+            st_name_input.setError(null);
+        }
+        String nacim = st_birth_input.getText().toString();
+        if(nacim.isEmpty()){
+            st_birth_input.setError("Escoja la fecha de nacimiento");
+            ok = false;
+        }else{
+            st_birth_input.setError(null);
+        }
+        TextView strgentag = (TextView)findViewById(R.id.strgentag);
+        if(st_genre_input.getCheckedRadioButtonId()==-1){
+            ok = false;
+            strgentag.setText(strgentag.getText().toString()+"*");
+            strgentag.setTextColor(Color.parseColor("#D32F2F"));
+        }else{
+            strgentag.setText("Sexo:");
+            strgentag.setTextColor(Color.parseColor("#FF737373"));
+        }
 
         return ok;
     }
@@ -287,8 +315,7 @@ public class AddStudent extends AppCompatActivity {
     }
     private void onCreateSuccess(Student s, FileManager fm){
         st_create.setEnabled(true);
-        fm.createStudent(s);
-
+        fm.createStudent(s, getApplicationContext());
         Intent i = new Intent(AddStudent.this, StudentsActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);

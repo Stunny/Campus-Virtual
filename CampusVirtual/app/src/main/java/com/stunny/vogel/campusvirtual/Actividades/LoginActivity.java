@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                password = _passwordInput.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailInput.setError("Introduce una dirección de email");
+            _emailInput.setError("Introduzca una dirección de email");
             ok = false;
         } else {
             _emailInput.setError(null);

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.stunny.vogel.campusvirtual.Actividades.AddStudent">
+    tools:context="com.stunny.vogel.campusvirtual.Actividades.AddExam">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="0px"
+                android:layout_height="0px"/>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -22,11 +27,10 @@
                 android:layout_marginBottom="20dp"
                 >
                 <EditText
-                    android:id="@+id/st_name_input"
+                    android:id="@+id/ex_date_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="@string/stname"
+                    android:hint="@string/ex_datetag"
                     />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -36,10 +40,10 @@
                 android:layout_marginBottom="20dp"
                 >
                 <EditText
-                    android:id="@+id/st_birth_input"
+                    android:id="@+id/ex_hour_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/stbirth"
+                    android:hint="@string/ex_hourtag"
                     />
             </android.support.design.widget.TextInputLayout>
             <RelativeLayout
@@ -47,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp">
                 <TextView
-                    android:id="@+id/especialidadString"
+                    android:id="@+id/ex_deg_input"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -56,80 +60,54 @@
                     android:textSize="18.5sp"/>
                 <Spinner
                     android:layout_width="wrap_content"
-                    android:layout_toRightOf="@id/especialidadString"
+                    android:layout_toRightOf="@id/ex_deg_input"
                     android:layout_height="50dp"
                     android:textAlignment="viewEnd"
                     android:gravity="fill_horizontal"
-                    android:id="@+id/st_degree_spinner"/>
+                    android:id="@+id/ex_degree_spinner"/>
             </RelativeLayout>
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/strgentag"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="4dp"
-                    android:text="@string/strgGen"
-                    android:textSize="18.5sp"
-                    android:layout_marginRight="10dp"/>
-                <RadioGroup
-                    android:id="@+id/radiogenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_toRightOf="@id/strgentag">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/sthombre"
-                        android:text="@string/M"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/stmujer"
-                        android:text="@string/W"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/stotro"
-                        android:text="@string/O"/>
-                </RadioGroup>
-            </RelativeLayout>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="4dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/strphoto"
-                android:textSize="18.5sp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/ex_subj_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/exsubj"
+                    android:textSize="18.5sp"/>
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_toRightOf="@id/ex_subj_input"
+                    android:layout_height="50dp"
+                    android:textAlignment="viewEnd"
+                    android:gravity="fill_horizontal"
+                    android:id="@+id/ex_subj_spinner"/>
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginBottom="30dp">
-                <ImageView
-                    android:id="@+id/st_selectedphoto"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="4dp"/>
-                <Button
-                    android:id="@+id/st_selectphoto"
-                    android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/ex_room_input"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/stselectphoto"
-                    android:layout_toRightOf="@id/st_selectedphoto"/>
+                    android:text="@string/exroom"
+                    android:textSize="18.5sp"/>
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_toRightOf="@id/ex_room_input"
+                    android:layout_height="50dp"
+                    android:textAlignment="viewEnd"
+                    android:gravity="fill_horizontal"
+                    android:id="@+id/ex_room_spinner"/>
             </RelativeLayout>
             <Button
-                android:id="@+id/createStudent"
+                android:id="@+id/createExam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

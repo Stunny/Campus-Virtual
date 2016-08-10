@@ -31,6 +31,7 @@
     <!--Gestion de asignaturas-->
     <string name="subjectMenu">Gestion asignaturas</string>
     <string name="addElement">Nuevo Elemento</string>
+    <string name="sbform">Nueva Asignatura</string>
     <string name="selectSubject">Selecciona una asignatura</string>
     <!--Gestion de alumnos-->
     <string name="stform">Nuevo alumno</string>
@@ -47,6 +48,7 @@
     <string name="M">Hombre</string>
     <string name="W">Mujer</string>
     <string name="O">Otro</string>
+    <!--Arrays-->
     <string-array name="degrees">
         <item>Informatica</item>
         <item>Telecomunicaciones</item>
@@ -55,7 +57,28 @@
         <item>Animacion</item>
         <item>Multimedia</item>
     </string-array>
+    <string-array name="subjects">
+        <item>Fotografia</item>
+        <item>Android</item>
+        <item>D.P.O.O</item>
+        <item>Fotografia</item>
+        <item>Bases de datos</item>
+        <item>Programacion I</item>
+    </string-array>
+    <string-array name="rooms">
+        <item>Aula 1</item>
+        <item>Aula 2</item>
+        <item>Aula 3</item>
+        <item>Aula 4</item>
+        <item>Aula 5</item>
+    </string-array>
     <!--Gestion  de examenes-->
     <string name="examMenu">Listado examenes</string>
     <string name="addExam">Nuevo Examen</string>
+    <string name="exform">Nuevo Examen</string>
+    <string name="exedit">Editar Examen</string>
+    <string name="ex_datetag">Fecha de examen</string>
+    <string name="ex_hourtag">Hora de examen</string>
+    <string name="exsubj">Asignatura:</string>
+    <string name="exroom">Aula:</string>
 </resources>
