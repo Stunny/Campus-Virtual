@@ -1,3 +1,61 @@
 <resources>
-    <string name="app_name">Campus Virtual</string>
+    <string name="app_name">Digital Campus</string>
+    <string name="title_activity_login">Log In</string>
+    <!-- User login data -->
+    <string name="user_email">administrador@salleurl.edu</string>
+    <string name="user_password">123qwe</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="auth">Autenticación</string>
+    <string name="em">Email</string>
+    <string name="pass">Contraseña</string>
+    <string name="log">Entra</string>
+    <string name="wrong_email">Email incorrecto</string>
+    <string name="wrong_pass">Contraseña incorrecta</string>
+    <!--Menu principal-->
+    <string name="manageSubjects">Gestionar Asignaturas</string>
+    <string name="manageStudents">Gestionar Alumnado</string>
+    <string name="manageExams">Exámenes</string>
+    <string name="sign_out">Salir</string>
+    <!-- Opciones menu actionbar -->
+    <string name="nuevoEstudiante">Crear Alumno</string>
+    <string name="nuevaAsignatura">Crear Asignatura</string>
+    <string name="nuevoExamen">Nuevo Examen</string>
+    <string name="salir">Salir</string>
+    <!--Iconos/FA-->
+    <string name="subject">&#xf02d;</string>
+    <string name="student">&#xf0c0;</string>
+    <string name="exam">&#xf0f6;</string>
+    <string name="logout">&#xf08b;</string>
+    <string name="trash">&#xf014;</string>
+    <string name="add">&#xf196;</string>
+    <!--Gestion de asignaturas-->
+    <string name="subjectMenu">Gestion asignaturas</string>
+    <string name="addElement">Nuevo Elemento</string>
+    <string name="selectSubject">Selecciona una asignatura</string>
+    <!--Gestion de alumnos-->
+    <string name="stform">Nuevo alumno</string>
+    <string name="selectStudent">Selecciona un alumno</string>
+    <string name="studentMenu">Gestion alumnos</string>
+    <string name="addStudent">Nuevo Alumno</string>
+    <string name="stname">Nombre y apellidos</string>
+    <string name="stbirth">Fecha de nacimiento</string>
+    <string name="stdeg"> Carrera:</string>
+    <string name="strgGen">Sexo:</string>
+    <string name="strphoto">Foto:</string>
+    <string name="stselectphoto">Seleccionar</string>
+    <string name="strcreate">Añadir</string>
+    <string name="M">Hombre</string>
+    <string name="W">Mujer</string>
+    <string name="O">Otro</string>
+    <string-array name="degrees">
+        <item>Informatica</item>
+        <item>Telecomunicaciones</item>
+        <item>Electronica</item>
+        <item>A.D.E.</item>
+        <item>Animacion</item>
+        <item>Multimedia</item>
+    </string-array>
+    <!--Gestion  de examenes-->
+    <string name="examMenu">Listado examenes</string>
+    <string name="addExam">Nuevo Examen</string>
 </resources>
