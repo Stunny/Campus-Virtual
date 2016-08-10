@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,8 +91,8 @@ public class StudentAdapter extends ArrayAdapter<Student>{
         ImageView iv = (ImageView) row.findViewById(R.id.icono_student);
         File imFile = new File(imPath);
         if(imFile.exists()){
-            Bitmap bm = BitmapFactory.decodeFile(imFile.getAbsolutePath());
-            iv.setImageBitmap(bm);
+            Uri imgUri = Uri.fromFile(imFile);
+            iv.setImageURI(imgUri);
         }else{
             iv.setImageResource(R.drawable.ic_default_student);
         }

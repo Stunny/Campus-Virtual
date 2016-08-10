@@ -198,6 +198,18 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+    public boolean exists(Student s){
+
+        return false;
+    }
+    public boolean exists(Subject s){
+
+        return false;
+    }
+    public boolean exists(Exam e){
+
+        return false;
+    }
     private JsonArray extract(String file) throws IOException{
         JsonParser parser = new JsonParser();
         JsonArray obj = (JsonArray) parser.parse(new FileReader(file));

@@ -2,6 +2,7 @@ package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,13 +11,11 @@ import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,26 +26,27 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.stunny.vogel.campusvirtual.Logica.FileManager;
+import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
 import com.stunny.vogel.campusvirtual.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class AddStudent extends AppCompatActivity {
 
-    private EditText st_name;
-    private EditText st_birth;
-    private RadioGroup st_genre;
+    private EditText st_name_input;
+    private EditText st_birth_input;
+    private RadioGroup st_genre_input;
     private DatePickerDialog st_birthPicker;
     private SimpleDateFormat sdf;
     private Spinner sp_Deg;
@@ -54,7 +54,7 @@ public class AddStudent extends AppCompatActivity {
     private Button st_selectPhoto,
                     st_create;
 
-    private String name, birthdate, degree, genre, photoPath;
+    private String name, degree, genre, photoPath;
     private Uri outputURI;
     private File outputFile;
 
@@ -78,7 +78,7 @@ public class AddStudent extends AppCompatActivity {
     }
 
     private void setViews(){
-        st_name = (EditText)findViewById(R.id.st_name_input);
+        st_name_input = (EditText)findViewById(R.id.st_name_input);
         sp_Deg = (Spinner)findViewById(R.id.st_degree_spinner);
         setSpinAdapter();
         sp_Deg.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -94,9 +94,9 @@ public class AddStudent extends AppCompatActivity {
             }
         });
 
-        st_birth = (EditText)findViewById(R.id.st_birth_input);
-        st_birth.setInputType(InputType.TYPE_NULL);
-        st_birth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        st_birth_input = (EditText)findViewById(R.id.st_birth_input);
+        st_birth_input.setInputType(InputType.TYPE_NULL);
+        st_birth_input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) showDatePicker();
@@ -104,8 +104,8 @@ public class AddStudent extends AppCompatActivity {
             }
         });
 
-        st_genre = (RadioGroup)findViewById(R.id.radiogenre);
-        st_genre.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        st_genre_input = (RadioGroup)findViewById(R.id.radiogenre);
+        st_genre_input.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 genre = (String) ((RadioButton) findViewById(checkedId)).getText();
@@ -135,7 +135,7 @@ public class AddStudent extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar bdate = Calendar.getInstance();
                 bdate.set(year, monthOfYear, dayOfMonth);
-                st_birth.setText(sdf.format(bdate.getTime()));
+                st_birth_input.setText(sdf.format(bdate.getTime()));
             }
         }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
     }
@@ -230,6 +230,67 @@ public class AddStudent extends AppCompatActivity {
         photoPath = u.getPath();
     }
     private void setCreateStudentListener(){
+        st_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                create();
+            }
+        });
+    }
 
+    private void create(){
+        final FileManager fm = new FileManager();
+        st_create.setEnabled(false);
+        name = st_name_input.getText().toString();
+
+        final ProgressDialog pd = new ProgressDialog(AddStudent.this, ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Comprobando...");
+        pd.setIndeterminate(true);
+        pd.show();
+
+        final Student s = new Student();
+        s.photoPath = photoPath;
+
+        String[] dates = st_birth_input.getText().toString().split("/");
+        s.birthDate = java.sql.Date.valueOf(dates[2]+"-"+dates[1]+"-"+dates[0]);
+
+        s.gender = genre;
+        s.degree = degree;
+        s.name = name;
+
+        if(!validate(s, pd)){
+            onCreateFailed(pd);
+            return;
+        }
+        if(fm.exists(s)){
+
+            onCreateFailed(pd);
+            return;
+        }
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        onCreateSuccess(s, fm);
+                        pd.dismiss();
+                    }
+                }, 3000);
+    }
+
+    private boolean validate(Student s, ProgressDialog pd){
+        boolean ok = true;
+
+        return ok;
+    }
+    private void onCreateFailed(ProgressDialog pd){
+        pd.dismiss();
+        st_create.setEnabled(true);
+    }
+    private void onCreateSuccess(Student s, FileManager fm){
+        st_create.setEnabled(true);
+        fm.createStudent(s);
+
+        Intent i = new Intent(AddStudent.this, StudentsActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 }

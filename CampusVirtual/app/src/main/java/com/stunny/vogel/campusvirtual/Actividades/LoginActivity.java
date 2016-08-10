@@ -15,19 +15,13 @@ import com.stunny.vogel.campusvirtual.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         //--ESCONDEMOS LA ACTION BAR--//
         getSupportActionBar().hide();
-
         //-- Escuchamos al boton de entrar --//
         Button _loginButton = (Button) findViewById(R.id.btn_log);
 
@@ -73,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             if(!email.equals(getString(R.string.user_email))){
                 _emailInput.setError(getString(R.string.wrong_email));
             }
-            if(!email.equals(getString(R.string.user_password))){
+            if(!password.equals(getString(R.string.user_password))){
                 _passwordInput.setError(getString(R.string.wrong_pass));
             }
             onLoginFailed(progressDialog);
@@ -122,29 +116,18 @@ public class LoginActivity extends AppCompatActivity {
                password = _passwordInput.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-
             _emailInput.setError("Introduce una dirección de email");
             ok = false;
-
         } else {
-
             _emailInput.setError(null);
-
         }
-
         if (password.isEmpty() || password.length() < 6) {
-
             _passwordInput.setError("La contraseña debe ser de mínimo 6 carácteres.");
             ok = false;
-
         } else {
-
             _passwordInput.setError(null);
-
         }
-
         return ok;
-
     }
 
     private void startSession(){
