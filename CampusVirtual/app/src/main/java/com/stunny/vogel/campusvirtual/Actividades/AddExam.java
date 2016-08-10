@@ -2,7 +2,9 @@ package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.stunny.vogel.campusvirtual.Logica.FileManager;
+import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
 
 import java.sql.Time;
@@ -167,6 +171,51 @@ public class AddExam extends AppCompatActivity {
     }
 
     private void setCreateListener(){
+        ex_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                create();
+            }
+        });
+    }
+    private void create(){
+        final FileManager fm = new FileManager();
+        ex_create.setEnabled(false);
 
+        final ProgressDialog pd = new ProgressDialog(AddExam.this, ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Comprobando...");
+        pd.show();
+
+        if(!validate()){
+            onCreateFailed(pd);
+            return;
+        }
+
+        //Comprobaciones de existencia
+        final Exam e = new Exam();
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        onCreateSuccess(e, fm);
+                        pd.dismiss();
+                    }
+                }, 3000);
+    }
+    private boolean validate(){
+        boolean ok = true;
+
+        return ok;
+    }
+    private void onCreateFailed(ProgressDialog pd){
+        pd.dismiss();
+        ex_create.setEnabled(true);
+    }
+    private void onCreateSuccess(Exam e, FileManager fm){
+        ex_create.setEnabled(true);
+        //fm.createExam(e, getApplicationContext());
+        Intent i = new Intent(AddExam.this, ExamsActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //startActivity(i);
     }
 }
