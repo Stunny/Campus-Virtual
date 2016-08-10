@@ -98,11 +98,13 @@ public class MainMenuActivity extends AppCompatActivity {
                 return true;
 
             case R.id.new_subject:
-
+                //Intent ns = new Intent(MainMenuActivity.this, AddSubject.class);
+                //startActivity(ns);
                 return true;
 
             case R.id.new_exam:
-
+                Intent ne = new Intent(MainMenuActivity.this, AddExam.class);
+                startActivity(ne);
                 return true;
 
             case R.id.quit:

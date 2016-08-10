@@ -31,6 +31,7 @@
     <!--Gestion de asignaturas-->
     <string name="subjectMenu">Gestion asignaturas</string>
     <string name="addElement">Nuevo Elemento</string>
+    <string name="sbform">Nueva Asignatura</string>
     <string name="selectSubject">Selecciona una asignatura</string>
     <!--Gestion de alumnos-->
     <string name="stform">Nuevo alumno</string>
@@ -58,4 +59,10 @@
     <!--Gestion  de examenes-->
     <string name="examMenu">Listado examenes</string>
     <string name="addExam">Nuevo Examen</string>
+    <string name="exform">Nuevo Examen</string>
+    <string name="exedit">Editar Examen</string>
+    <string name="ex_datetag">Fecha de examen</string>
+    <string name="ex_hourtag">Hora de examen</string>
+    <string name="exsubj">Asignatura:</string>
+    <string name="exroom">Aula:</string>
 </resources>

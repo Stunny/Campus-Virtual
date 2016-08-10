@@ -38,10 +38,16 @@
             android:parentActivityName=".Actividades.MainMenuActivity" />
         <activity
             android:name=".Actividades.AddStudent"
-            android:parentActivityName=".Actividades.StudentsActivity"/>
+            android:parentActivityName=".Actividades.StudentsActivity" />
+        <activity
+            android:name=".Actividades.AddExam"
+            android:parentActivityName=".Actividades.ExamsActivity"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+
     </application>
 
 </manifest>

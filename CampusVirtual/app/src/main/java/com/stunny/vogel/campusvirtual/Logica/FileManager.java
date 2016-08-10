@@ -106,7 +106,7 @@ public class FileManager {
 
         try{
 
-            JsonArray exams = extract(context.getFilesDir()+"/exams.json");
+            JsonArray exams = extract(context.getFilesDir() + "/exams.json");
             for(int i = 0; i<exams.size(); i++){
                 aux = new Exam();
                 obj = (JsonObject)exams.get(i);
@@ -138,7 +138,7 @@ public class FileManager {
         JsonObject obj;
 
         try{
-            JsonArray students = extract(context.getFilesDir()+"/students.json");
+            JsonArray students = extract(context.getFilesDir() + "/students.json");
             for(int i = 0; i<students.size(); i++){
                 aux = new Student();
                 obj = (JsonObject)students.get(i);
@@ -198,9 +198,18 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-    public boolean exists(Student s){
-
-        return false;
+    public boolean exists(Student s, Context context){
+        boolean ex = false;
+        try {
+            JsonArray students = extract(context.getFilesDir() + "/students.json");
+            JsonObject aux;
+            for(int i = 0; i<students.size(); i++){
+                aux = (JsonObject)students.get(i);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ex;
     }
     public boolean exists(Subject s){
 
@@ -210,7 +219,7 @@ public class FileManager {
 
         return false;
     }
-    public void createStudent(Student s){
+    public void createStudent(Student s, Context context){
 
     }
     private JsonArray extract(String file) throws IOException{
