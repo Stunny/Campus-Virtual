@@ -164,6 +164,7 @@ public class FileManager {
     }
     public void removeSubject(Subject s, Context context){
         try {
+            Log.d("remove", "subject");
             JsonArray subjects = extract(context.getFilesDir()+"/subjects.json");
             JsonObject aux;
             for(int i = 0; i<subjects.size(); i++){
@@ -208,6 +209,7 @@ public class FileManager {
             FileOutputStream fos = new FileOutputStream(path, false);
             fos.write(ja.toString().getBytes());
             fos.close();
+            Log.d("rewrite", "true");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }catch (IOException ie){
