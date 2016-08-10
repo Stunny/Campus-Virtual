@@ -158,9 +158,11 @@ public class AddExam extends AppCompatActivity {
         }, date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE), true);
     }
     private void showDatePicker(){
+        ex_pickDate.setTitle("Fecha de examen");
         ex_pickDate.show();
     }
     private void showHourPicker(){
+        ex_pickHour.setTitle("Hora de examen");
         ex_pickHour.show();
     }
 
