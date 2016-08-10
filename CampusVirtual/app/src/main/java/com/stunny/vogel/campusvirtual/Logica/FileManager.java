@@ -210,6 +210,9 @@ public class FileManager {
 
         return false;
     }
+    public void createStudent(Student s){
+
+    }
     private JsonArray extract(String file) throws IOException{
         JsonParser parser = new JsonParser();
         JsonArray obj = (JsonArray) parser.parse(new FileReader(file));
@@ -223,8 +226,10 @@ public class FileManager {
             fos.close();
             Log.d("rewrite", "true");
         } catch (FileNotFoundException e) {
+            Log.d("reWrite", "FileNotFound");
             e.printStackTrace();
         }catch (IOException ie){
+            Log.d("reWrite", "IOException");
             ie.printStackTrace();
         }
 
