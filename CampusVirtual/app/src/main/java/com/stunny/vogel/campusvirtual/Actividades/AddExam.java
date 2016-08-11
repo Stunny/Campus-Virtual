@@ -15,11 +15,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,6 +37,8 @@ public class AddExam extends AppCompatActivity {
 
     private DatePickerDialog ex_pickDate;
     private TimePickerDialog ex_pickHour;
+    private Date dDate;
+    private Time dTime;
 
     private Button ex_create;
 
@@ -149,6 +153,7 @@ public class AddExam extends AppCompatActivity {
                 Calendar bdate = Calendar.getInstance();
                 bdate.set(year, monthOfYear, dayOfMonth);
                 mDate = dfD.format(bdate.getTime());
+                dDate = Date.valueOf(year+"-"+monthOfYear+"-"+dayOfMonth);
                 ex_date_input.setText(mDate);
             }
         }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
@@ -157,6 +162,7 @@ public class AddExam extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 hour = Integer.toString(hourOfDay)+':'+Integer.toString(minute);
+                dTime = Time.valueOf(hour+':'+"00");
                 ex_hour_input.setText(hour);
             }
         }, date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE), true);
@@ -193,6 +199,17 @@ public class AddExam extends AppCompatActivity {
 
         //Comprobaciones de existencia
         final Exam e = new Exam();
+        e.room = room;
+        e.fecha = dDate;
+        e.hora = dTime;
+        e.degree = degree;
+        e.subject = subject;
+
+        if(fm.exists(e)){
+                onCreateFailed(pd);
+                Toast.makeText(AddExam.this, "El examen ya existe.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -204,7 +221,7 @@ public class AddExam extends AppCompatActivity {
     }
     private boolean validate(){
         boolean ok = true;
-
+        //--VALIDAR LOS DATOS INTRODUCIDOS
         return ok;
     }
     private void onCreateFailed(ProgressDialog pd){

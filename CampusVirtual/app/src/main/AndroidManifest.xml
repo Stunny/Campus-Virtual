@@ -42,6 +42,9 @@
         <activity
             android:name=".Actividades.AddExam"
             android:parentActivityName=".Actividades.ExamsActivity"/>
+        <activity
+            android:name=".Actividades.EditExam"
+            android:parentActivityName=".Actividades.ExamsActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
