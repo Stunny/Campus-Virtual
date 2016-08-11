@@ -222,6 +222,9 @@ public class FileManager {
     public void createStudent(Student s, Context context){
 
     }
+    public void createExam(Exam e, Context context){
+
+    }
     private JsonArray extract(String file) throws IOException{
         JsonParser parser = new JsonParser();
         JsonArray obj = (JsonArray) parser.parse(new FileReader(file));
