@@ -53,6 +53,7 @@ public class ExamsActivity extends AppCompatActivity {
             case R.id.add:
                 Intent i = new Intent(ExamsActivity.this, AddExam.class);
                 startActivity(i);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

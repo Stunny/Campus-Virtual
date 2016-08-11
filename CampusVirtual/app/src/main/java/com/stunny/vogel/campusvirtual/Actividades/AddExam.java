@@ -168,11 +168,11 @@ public class AddExam extends AppCompatActivity {
         }, date.get(Calendar.HOUR_OF_DAY), date.get(Calendar.MINUTE), true);
     }
     private void showDatePicker(){
-        ex_pickDate.setTitle("Fecha de examen");
+        //ex_pickDate.setTitle("Fecha de examen");
         ex_pickDate.show();
     }
     private void showHourPicker(){
-        ex_pickHour.setTitle("Hora de examen");
+        //ex_pickHour.setTitle("Hora de examen");
         ex_pickHour.show();
     }
 
@@ -221,7 +221,38 @@ public class AddExam extends AppCompatActivity {
     }
     private boolean validate(){
         boolean ok = true;
+        Calendar c = Calendar.getInstance();
+        String currentDate = Integer.toString(c.get(Calendar.YEAR))+'-'
+                +Integer.toString(c.get(Calendar.MONTH))+'-'
+                +Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+        Time currentHour = Time.valueOf(Integer.toString(c.get(Calendar.HOUR_OF_DAY))+':'
+                +Integer.toString(c.get(Calendar.MINUTE))+':'
+                +Integer.toString(c.get(Calendar.SECOND)));
         //--VALIDAR LOS DATOS INTRODUCIDOS
+
+        if(ex_date_input.getText().toString().isEmpty()){
+            ex_date_input.setError("Introduzca fecha de examen");
+            Toast.makeText(AddExam.this, "Introduzca fecha de examen", Toast.LENGTH_SHORT).show();
+            ok = false;
+        }else if(dDate.before(Date.valueOf(currentDate))){
+            ex_date_input.setError("Introduzca una fecha futura");
+            Toast.makeText(AddExam.this, "Introduzca una fecha futura", Toast.LENGTH_SHORT).show();
+            ok = false;
+        }else{
+            ex_date_input.setError(null);
+        }
+        if(ex_hour_input.getText().toString().isEmpty()){
+            ex_hour_input.setError("Introduzca hora de examen");
+            Toast.makeText(AddExam.this, "Introduzca hora de examen", Toast.LENGTH_SHORT).show();
+            ok = false;
+        }else if(dDate.compareTo(Date.valueOf(currentDate)) == 0 && dTime.compareTo(currentHour) < 0){
+            ex_hour_input.setError("Introduzca una hora de examen futura");
+            Toast.makeText(AddExam.this, "Introduzca una hora de examen futura", Toast.LENGTH_SHORT).show();
+            ok = false;
+        }else{
+            ex_hour_input.setError(null);
+        }
+
         return ok;
     }
     private void onCreateFailed(ProgressDialog pd){
@@ -230,9 +261,10 @@ public class AddExam extends AppCompatActivity {
     }
     private void onCreateSuccess(Exam e, FileManager fm){
         ex_create.setEnabled(true);
-        //fm.createExam(e, getApplicationContext());
+        fm.createExam(e, getApplicationContext());
         Intent i = new Intent(AddExam.this, ExamsActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        //startActivity(i);
+        i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(i);
+        finish();
     }
 }
