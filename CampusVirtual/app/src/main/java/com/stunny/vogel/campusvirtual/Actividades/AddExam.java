@@ -161,7 +161,7 @@ public class AddExam extends AppCompatActivity {
         ex_pickHour = new TimePickerDialog(AddExam.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                hour = Integer.toString(hourOfDay)+':'+Integer.toString(minute);
+                hour = String.format("%02d", hourOfDay)+':'+String.format("%02d", minute);
                 dTime = Time.valueOf(hour+':'+"00");
                 ex_hour_input.setText(hour);
             }
