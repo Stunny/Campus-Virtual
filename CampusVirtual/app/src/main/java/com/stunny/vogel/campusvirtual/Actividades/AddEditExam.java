@@ -1,12 +1,15 @@
 package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,7 +30,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AddExam extends AppCompatActivity {
+public class AddEditExam extends AppCompatActivity {
+
+    private boolean _ADD;
+
+    String eHora, eFecha, eSubj, eRoom, eDeg;
 
     private EditText ex_date_input;
     private EditText ex_hour_input;
@@ -51,11 +58,25 @@ public class AddExam extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exam);
 
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+
+        _ADD = b.getBoolean("ADD");
+
+        if(!_ADD){
+            eFecha = b.getString("fecha");
+            eHora = b.getString("hora");
+            eSubj = b.getString("subj");
+            eRoom = b.getString("aula");
+            eDeg = b.getString("deg");
+        }
+
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_hardware_keyboard_arrow_left);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setSubtitle(R.string.exform);
+        if(_ADD) getSupportActionBar().setSubtitle(R.string.exform);
+        else getSupportActionBar().setSubtitle(R.string.exedit);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
 
@@ -64,6 +85,26 @@ public class AddExam extends AppCompatActivity {
 
         setViews();
         setDialogs();
+    }
+
+    public void onBackPressed(){
+        exit();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                exit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void exit(){
+        /*if(everyThingClean()) */super.onBackPressed();
+        //else
+        confirmExit();
     }
 
     private void setViews(){
@@ -78,6 +119,20 @@ public class AddExam extends AppCompatActivity {
 
         ex_create = (Button)findViewById(R.id.createExam);
         setCreateListener();
+
+        if(!_ADD){
+            ex_date_input.setText(dfD.format(Date.valueOf(eFecha)));
+            ex_hour_input.setText(dfH.format(Time.valueOf(eHora)));
+            ex_create.setText(R.string.save);
+
+            ArrayAdapter a = (ArrayAdapter) ex_degree_sp.getAdapter();
+            ArrayAdapter aa = (ArrayAdapter) ex_subj_sp.getAdapter();
+            ArrayAdapter aaa = (ArrayAdapter) ex_room_sp.getAdapter();
+
+            ex_degree_sp.setSelection(a.getPosition(eDeg));
+            ex_subj_sp.setSelection(aa.getPosition(eSubj));
+            ex_room_sp.setSelection(aaa.getPosition(eRoom));
+        }
     }
     private void setupSpinners(){
         ArrayAdapter<CharSequence> degAdap = ArrayAdapter.createFromResource(this,
@@ -147,7 +202,7 @@ public class AddExam extends AppCompatActivity {
     }
     private void setDialogs(){
         Calendar date = Calendar.getInstance();
-        ex_pickDate = new DatePickerDialog(AddExam.this, new DatePickerDialog.OnDateSetListener() {
+        ex_pickDate = new DatePickerDialog(AddEditExam.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar bdate = Calendar.getInstance();
@@ -158,7 +213,7 @@ public class AddExam extends AppCompatActivity {
             }
         }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
 
-        ex_pickHour = new TimePickerDialog(AddExam.this, new TimePickerDialog.OnTimeSetListener() {
+        ex_pickHour = new TimePickerDialog(AddEditExam.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 hour = String.format("%02d", hourOfDay)+':'+String.format("%02d", minute);
@@ -188,7 +243,7 @@ public class AddExam extends AppCompatActivity {
         final FileManager fm = new FileManager();
         ex_create.setEnabled(false);
 
-        final ProgressDialog pd = new ProgressDialog(AddExam.this, ProgressDialog.STYLE_SPINNER);
+        final ProgressDialog pd = new ProgressDialog(AddEditExam.this, ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Comprobando...");
         pd.show();
 
@@ -207,7 +262,7 @@ public class AddExam extends AppCompatActivity {
 
         if(fm.exists(e)){
                 onCreateFailed(pd);
-                Toast.makeText(AddExam.this, "El examen ya existe.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddEditExam.this, "El examen ya existe.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -232,22 +287,22 @@ public class AddExam extends AppCompatActivity {
 
         if(ex_date_input.getText().toString().isEmpty()){
             ex_date_input.setError("Introduzca fecha de examen");
-            Toast.makeText(AddExam.this, "Introduzca fecha de examen", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddEditExam.this, "Introduzca fecha de examen", Toast.LENGTH_SHORT).show();
             ok = false;
         }else if(dDate.before(Date.valueOf(currentDate))){
             ex_date_input.setError("Introduzca una fecha futura");
-            Toast.makeText(AddExam.this, "Introduzca una fecha futura", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddEditExam.this, "Introduzca una fecha futura", Toast.LENGTH_SHORT).show();
             ok = false;
         }else{
             ex_date_input.setError(null);
         }
         if(ex_hour_input.getText().toString().isEmpty()){
             ex_hour_input.setError("Introduzca hora de examen");
-            Toast.makeText(AddExam.this, "Introduzca hora de examen", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddEditExam.this, "Introduzca hora de examen", Toast.LENGTH_SHORT).show();
             ok = false;
         }else if(dDate.compareTo(Date.valueOf(currentDate)) == 0 && dTime.compareTo(currentHour) < 0){
             ex_hour_input.setError("Introduzca una hora de examen futura");
-            Toast.makeText(AddExam.this, "Introduzca una hora de examen futura", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddEditExam.this, "Introduzca una hora de examen futura", Toast.LENGTH_SHORT).show();
             ok = false;
         }else{
             ex_hour_input.setError(null);
@@ -262,9 +317,39 @@ public class AddExam extends AppCompatActivity {
     private void onCreateSuccess(Exam e, FileManager fm){
         ex_create.setEnabled(true);
         fm.createExam(e, getApplicationContext());
-        Intent i = new Intent(AddExam.this, ExamsActivity.class);
+        Intent i = new Intent(AddEditExam.this, ExamsActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
         finish();
+    }
+
+
+    private void confirmExit(){
+        AlertDialog.Builder adb = new AlertDialog.Builder(AddEditExam.this);
+        adb.setTitle("Salir");
+        adb.setMessage("¿Desea descartar los cambios?");
+        adb.setCancelable(true);
+
+        adb.setPositiveButton(
+                "Si",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AddEditExam.this.finish();
+                        dialog.cancel();
+                    }
+                }
+        );
+        adb.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }
+        );
+        AlertDialog ad = adb.create();
+        ad.show();
     }
 }

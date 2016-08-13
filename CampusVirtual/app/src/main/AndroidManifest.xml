@@ -39,10 +39,7 @@
             android:name=".Actividades.AddStudent"
             android:parentActivityName=".Actividades.StudentsActivity" />
         <activity
-            android:name=".Actividades.AddExam"
-            android:parentActivityName=".Actividades.ExamsActivity"/>
-        <activity
-            android:name=".Actividades.EditExam"
+            android:name=".Actividades.AddEditExam"
             android:parentActivityName=".Actividades.ExamsActivity"/>
 
         <meta-data
