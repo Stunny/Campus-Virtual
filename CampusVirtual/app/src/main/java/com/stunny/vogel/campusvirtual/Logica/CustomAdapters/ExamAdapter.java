@@ -2,12 +2,15 @@ package com.stunny.vogel.campusvirtual.Logica.CustomAdapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.stunny.vogel.campusvirtual.Actividades.EditExam;
+import com.stunny.vogel.campusvirtual.Actividades.ExamsActivity;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
@@ -27,10 +30,12 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
     private List<Exam> elements;
     private File examsFile;
     private FileManager fm;
+    private Context c;
 
     public ExamAdapter(Context context){
         super(context, R.layout.subject);
         this.fm = new FileManager();
+        this.c = context;
         this.elements = new ArrayList<>();
         this.examsFile = new File("exams.json");
         populateList();
@@ -67,8 +72,10 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent();
-                    //startActivity(i); Go to exam page
+                    Log.d("click", "oya oya");
+                    Intent i = new Intent(c, EditExam.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    c.startActivity(i);
                 }
             });
         }
@@ -91,4 +98,6 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
 
         return row;
     }
+
 }
+
