@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
 
+import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -65,7 +68,9 @@ public class AddEditExam extends AppCompatActivity {
 
         if(!_ADD){
             eFecha = b.getString("fecha");
+            dDate = Date.valueOf(eFecha);
             eHora = b.getString("hora");
+            dTime = Time.valueOf(eHora);
             eSubj = b.getString("subj");
             eRoom = b.getString("aula");
             eDeg = b.getString("deg");
@@ -102,9 +107,8 @@ public class AddEditExam extends AppCompatActivity {
     }
 
     private void exit(){
-        /*if(everyThingClean()) */super.onBackPressed();
-        //else
-        confirmExit();
+        if(everyThingClean()) super.onBackPressed();
+        else confirmExit();
     }
 
     private void setViews(){
@@ -118,7 +122,8 @@ public class AddEditExam extends AppCompatActivity {
         setupEdits();
 
         ex_create = (Button)findViewById(R.id.createExam);
-        setCreateListener();
+        if (_ADD )setCreateListener();
+        if (!_ADD)setUpdateListener();
 
         if(!_ADD){
             ex_date_input.setText(dfD.format(Date.valueOf(eFecha)));
@@ -239,6 +244,42 @@ public class AddEditExam extends AppCompatActivity {
             }
         });
     }
+    private void setUpdateListener(){
+        ex_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update();
+            }
+        });
+    }
+    private void update(){
+        final FileManager fm = new FileManager();
+        ex_create.setEnabled(false);
+
+        final ProgressDialog pd = new ProgressDialog(AddEditExam.this, ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Comprobando...");
+        pd.show();
+
+        if(!validate() || everyThingClean()){
+            onCreateFailed(pd);
+            return;
+        }
+
+        final Exam e = new Exam();
+        e.room = room;
+        e.fecha = dDate;
+        e.hora = dTime;
+        e.degree = degree;
+        e.subject = subject;
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        onCreateSuccess(e, fm);
+                    }
+                }, 3000);
+    }
     private void create(){
         final FileManager fm = new FileManager();
         ex_create.setEnabled(false);
@@ -307,6 +348,36 @@ public class AddEditExam extends AppCompatActivity {
         }else{
             ex_hour_input.setError(null);
         }
+        if(ex_room_sp.getSelectedItemPosition() == 0){
+            ok = false;
+            TextView tag = (TextView)findViewById(R.id.ex_room_input);
+            tag.setText(tag.getText().toString()+"*");
+            tag.setTextColor(R.color.colorPrimaryDark);
+        }else{
+            TextView tag = (TextView)findViewById(R.id.ex_room_input);
+            tag.setText(R.string.exroom);
+            tag.setTextColor(R.color.formTextColor);
+        }
+        if(ex_degree_sp.getSelectedItemPosition() == 0){
+            ok = false;
+            TextView tag = (TextView)findViewById(R.id.ex_deg_input);
+            tag.setText(tag.getText().toString()+"*");
+            tag.setTextColor(R.color.colorPrimaryDark);
+        }else{
+            TextView tag = (TextView)findViewById(R.id.ex_deg_input);
+            tag.setText(R.string.stdeg);
+            tag.setTextColor(R.color.formTextColor);
+        }
+        if(ex_subj_sp.getSelectedItemPosition() == 0){
+            ok = false;
+            TextView tag = (TextView)findViewById(R.id.ex_subj_input);
+            tag.setText(tag.getText().toString()+"*");
+            tag.setTextColor(R.color.colorPrimaryDark);
+        }else{
+            TextView tag = (TextView)findViewById(R.id.ex_subj_input);
+            tag.setText(R.string.exsubj);
+            tag.setTextColor(R.color.formTextColor);
+        }
 
         return ok;
     }
@@ -316,14 +387,36 @@ public class AddEditExam extends AppCompatActivity {
     }
     private void onCreateSuccess(Exam e, FileManager fm){
         ex_create.setEnabled(true);
-        fm.createExam(e, getApplicationContext());
+        if (_ADD)fm.createExam(e, getApplicationContext());
+        if(!_ADD)fm.updateExam(e);
         Intent i = new Intent(AddEditExam.this, ExamsActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
         finish();
     }
+    private boolean everyThingClean(){
+        boolean clean = true;
+        ArrayAdapter a = (ArrayAdapter) ex_degree_sp.getAdapter();
+        ArrayAdapter aa = (ArrayAdapter) ex_subj_sp.getAdapter();
+        ArrayAdapter aaa = (ArrayAdapter) ex_room_sp.getAdapter();
 
+        if(_ADD){
+            clean = ex_date_input.getText().toString().isEmpty()
+                    && ex_hour_input.getText().toString().isEmpty()
+                    && ex_subj_sp.getSelectedItemPosition() == 0
+                    && ex_room_sp.getSelectedItemPosition() == 0
+                    && ex_degree_sp.getSelectedItemPosition() == 0;
+        }
+        if (!_ADD){
+            clean = ex_date_input.getText().toString().equals(dfD.format(Date.valueOf(eFecha)))
+                    && ex_hour_input.getText().toString().equals(dfH.format(Time.valueOf(eHora)))
+                    && aa.getPosition(eSubj) == ex_subj_sp.getSelectedItemPosition()
+                    && a.getPosition(eDeg) == ex_degree_sp.getSelectedItemPosition()
+                    && aaa.getPosition(eRoom) == ex_room_sp.getSelectedItemPosition();
+        }
 
+        return clean;
+    }
     private void confirmExit(){
         AlertDialog.Builder adb = new AlertDialog.Builder(AddEditExam.this);
         adb.setTitle("Salir");

@@ -51,6 +51,7 @@
     <string name="O">Otro</string>
     <!--Arrays-->
     <string-array name="degrees">
+        <item>Selecciona un grado</item>
         <item>Informatica</item>
         <item>Telecomunicaciones</item>
         <item>Electronica</item>
@@ -59,6 +60,7 @@
         <item>Multimedia</item>
     </string-array>
     <string-array name="subjects">
+        <item>Selecciona una asignatura</item>
         <item>Fotografia</item>
         <item>Android</item>
         <item>D.P.O.O</item>
@@ -67,6 +69,7 @@
         <item>Programacion I</item>
     </string-array>
     <string-array name="rooms">
+        <item>Selecciona un aula</item>
         <item>Aula 1</item>
         <item>Aula 2</item>
         <item>Aula 3</item>

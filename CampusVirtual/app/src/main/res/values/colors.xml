@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="logoColor">#3CF485</color>
+    <color name="formTextColor">#FF737373</color>
     <color name="transparent">#0000</color>
     <color name="white">#FFF</color>
 </resources>
