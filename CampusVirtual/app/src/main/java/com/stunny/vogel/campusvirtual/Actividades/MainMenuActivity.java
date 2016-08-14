@@ -103,7 +103,8 @@ public class MainMenuActivity extends AppCompatActivity {
                 return true;
 
             case R.id.new_exam:
-                Intent ne = new Intent(MainMenuActivity.this, AddExam.class);
+                Intent ne = new Intent(MainMenuActivity.this, AddEditExam.class);
+                ne.putExtra("ADD", true);
                 startActivity(ne);
                 return true;
 

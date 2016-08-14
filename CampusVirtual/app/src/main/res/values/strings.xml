@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Digital Campus</string>
     <string name="title_activity_login">Log In</string>
+    <string name="save">Guardar</string>
     <!-- User login data -->
     <string name="user_email">administrador@salleurl.edu</string>
     <string name="user_password">123qwe</string>
@@ -50,6 +51,7 @@
     <string name="O">Otro</string>
     <!--Arrays-->
     <string-array name="degrees">
+        <item>Selecciona un grado</item>
         <item>Informatica</item>
         <item>Telecomunicaciones</item>
         <item>Electronica</item>
@@ -58,6 +60,7 @@
         <item>Multimedia</item>
     </string-array>
     <string-array name="subjects">
+        <item>Selecciona una asignatura</item>
         <item>Fotografia</item>
         <item>Android</item>
         <item>D.P.O.O</item>
@@ -66,6 +69,7 @@
         <item>Programacion I</item>
     </string-array>
     <string-array name="rooms">
+        <item>Selecciona un aula</item>
         <item>Aula 1</item>
         <item>Aula 2</item>
         <item>Aula 3</item>

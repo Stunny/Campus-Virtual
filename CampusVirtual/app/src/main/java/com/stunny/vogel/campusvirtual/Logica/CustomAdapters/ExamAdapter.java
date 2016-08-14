@@ -2,12 +2,14 @@ package com.stunny.vogel.campusvirtual.Logica.CustomAdapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.stunny.vogel.campusvirtual.Actividades.AddEditExam;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
@@ -27,10 +29,12 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
     private List<Exam> elements;
     private File examsFile;
     private FileManager fm;
+    private Context c;
 
     public ExamAdapter(Context context){
         super(context, R.layout.subject);
         this.fm = new FileManager();
+        this.c = context;
         this.elements = new ArrayList<>();
         this.examsFile = new File("exams.json");
         populateList();
@@ -58,6 +62,13 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent){
 
+        final Date dHora = elements.get(position).hora,
+                dFecha = elements.get(position).fecha;
+        final String  subj = elements.get(position).subject,
+                room = elements.get(position).room,
+                eDeg = elements.get(position).degree;
+
+
         View row = convertView;
         if(row == null){
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,8 +78,16 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent();
-                    //startActivity(i); Go to exam page
+                    Log.d("click", "oya oya");
+                    Intent i = new Intent(c, AddEditExam.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("ADD", false);
+                    i.putExtra("hora", dHora.toString());
+                    i.putExtra("fecha", dFecha.toString());
+                    i.putExtra("subj", subj);
+                    i.putExtra("aula", room);
+                    i.putExtra("deg", eDeg);
+                    c.startActivity(i);
                 }
             });
         }
@@ -79,16 +98,18 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
                 aula = (TextView)row.findViewById(R.id.exam_aula);
 
         DateFormat form = new SimpleDateFormat("HH:mm");
-        String hour = form.format(elements.get(position).hora);
+        String hour = form.format(dHora);
 
         hora.setText("Hora: "+hour);
         form = new SimpleDateFormat("dd/MM/yyyy");
-        String fecha = form.format(elements.get(position).fecha);
+        String fecha = form.format(dFecha);
 
         date.setText(fecha);
-        asig.setText("Asignatura: "+elements.get(position).subject);
-        aula.setText(elements.get(position).room);
+        asig.setText("Asignatura: "+subj);
+        aula.setText(room);
 
         return row;
     }
+
 }
+

@@ -1,9 +1,11 @@
 package com.stunny.vogel.campusvirtual.Actividades;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -11,12 +13,16 @@ import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -301,10 +307,20 @@ public class AddStudent extends AppCompatActivity {
         if(st_genre_input.getCheckedRadioButtonId()==-1){
             ok = false;
             strgentag.setText(strgentag.getText().toString()+"*");
-            strgentag.setTextColor(Color.parseColor("#D32F2F"));
+            strgentag.setTextColor(R.color.colorPrimaryDark);
         }else{
-            strgentag.setText("Sexo:");
-            strgentag.setTextColor(Color.parseColor("#FF737373"));
+            strgentag.setText(R.string.strgGen);
+            strgentag.setTextColor(R.color.formTextColor);
+        }
+        if(sp_Deg.getSelectedItemPosition() == 0){
+            ok = false;
+            TextView tag = (TextView)findViewById(R.id.especialidadString);
+            tag.setText(tag.getText().toString()+"*");
+            tag.setTextColor(R.color.colorPrimaryDark);
+        }else{
+            TextView tag = (TextView)findViewById(R.id.especialidadString);
+            tag.setText(R.string.stdeg);
+            tag.setTextColor(R.color.formTextColor);
         }
 
         return ok;
@@ -319,5 +335,72 @@ public class AddStudent extends AppCompatActivity {
         Intent i = new Intent(AddStudent.this, StudentsActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
+    }
+    public void onBackPressed(){
+        exit();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                exit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    private void exit(){
+        if(everyThingClean()) super.onBackPressed();
+        else confirmExit();
+    }
+    private void confirmExit(){
+        AlertDialog.Builder adb = new AlertDialog.Builder(AddStudent.this);
+        adb.setTitle("Salir");
+        adb.setMessage("¿Desea descartar los cambios?");
+        adb.setCancelable(true);
+
+        adb.setPositiveButton(
+                "Si",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AddStudent.this.finish();
+                        dialog.cancel();
+                    }
+                }
+        );
+        adb.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }
+        );
+        AlertDialog ad = adb.create();
+        ad.show();
+    }
+
+    private boolean everyThingClean(){
+        boolean clean = true;
+
+        clean = st_name_input.getText().toString().isEmpty()
+                && st_birth_input.getText().toString().isEmpty()
+                && sp_Deg.getSelectedItemPosition() == 0
+                && st_genre_input.getCheckedRadioButtonId() == -1
+                && !hasImage(st_selectedPhoto);
+
+        return clean;
+    }
+    private boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
+
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+        }
+
+        return hasImage;
     }
 }
