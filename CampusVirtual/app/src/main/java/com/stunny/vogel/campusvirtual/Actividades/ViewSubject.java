@@ -30,12 +30,16 @@ public class ViewSubject extends AppCompatActivity {
     private ArrayList<String> students, themes;
     private String name, descrip, iconPath;
 
+    private FileManager fm;
+
     private TextView sbtitle, sbdesc, sbThemes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_subject);
+
+        fm = new FileManager();
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_hardware_keyboard_arrow_left);
@@ -112,6 +116,8 @@ public class ViewSubject extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final ProgressDialog pd = new ProgressDialog(ViewSubject.this, ProgressDialog.STYLE_SPINNER);
+                        pd.setMessage("Eliminando...");
+                        pd.show();
                         new android.os.Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -136,6 +142,7 @@ public class ViewSubject extends AppCompatActivity {
         del.show();
     }
     private void delete(){
-
+        fm.removeSubject(name, getApplicationContext());
+        ViewSubject.this.finish();
     }
 }

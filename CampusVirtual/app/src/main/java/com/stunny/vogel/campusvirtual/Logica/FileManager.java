@@ -189,6 +189,31 @@ public class FileManager {
 
         return elements;
     }
+    public ArrayList<String> findStudentSubjects(String name, Context context){
+        ArrayList<String> rSubjs = new ArrayList<>();
+        JsonObject aux, nAux;
+        JsonArray sAux;
+        try {
+            JsonArray subjects = extract(context.getFilesDir()+"/subjects.json");
+
+            for(int i = 0; i<subjects.size(); i++){
+                aux = (JsonObject)subjects.get(i);
+                sAux = (JsonArray)aux.get("students");
+                for(int j = 0; j<sAux.size(); j++){
+                    nAux = (JsonObject) sAux.get(j);
+                    if(name.equals(nAux.get("student_name").getAsString())){
+                        rSubjs.add(aux.get("name").getAsString());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+        return rSubjs;
+    }
     public void removeSubject(Subject s, Context context){
         try {
             Log.d("remove", "subject");
@@ -206,6 +231,9 @@ public class FileManager {
             e.printStackTrace();
             return;
         }
+
+    }
+    public void removeSubject(String subjName, Context context){
 
     }
     public void removeStudent(Student s, Context context){

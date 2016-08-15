@@ -51,13 +51,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Actividades.ViewSubject"
-            android:parentActivityName=".Actividades.SubjectsActivity"/>
+            android:parentActivityName=".Actividades.SubjectsActivity" />
+        <activity
+            android:name=".Actividades.ViewStudent"
+            android:parentActivityName=".Actividades.StudentsActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-
     </application>
 
 </manifest>

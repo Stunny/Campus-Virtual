@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.stunny.vogel.campusvirtual.Actividades.ViewStudent;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
 import com.stunny.vogel.campusvirtual.R;
@@ -72,8 +73,13 @@ public class StudentAdapter extends ArrayAdapter<Student>{
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent();
-                    //startActivity(i); Go to student page
+                    Intent i = new Intent(activityRef, ViewStudent.class);
+                    i.putExtra("name", elements.get(position).name);
+                    i.putExtra("birthDate", elements.get(position).birthDate.toString());
+                    i.putExtra("degree", elements.get(position).degree);
+                    i.putExtra("gender", elements.get(position).gender);
+                    i.putExtra("photoPath", elements.get(position).photoPath);
+                    activityRef.startActivity(i);
                 }
             });
         }

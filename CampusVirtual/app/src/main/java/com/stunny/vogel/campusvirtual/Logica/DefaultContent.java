@@ -101,7 +101,7 @@ public interface DefaultContent {
             "    \"birth_year\": 1963,\n" +
             "    \"degree\": \"Multimedia\",\n" +
             "    \"photoPath\": \"\",\n" +
-            "    \"gender\": \"Masculino\"\n" +
+            "    \"gender\": \"Hombre\"\n" +
             "  },\n" +
             "  {\n" +
             "    \"name\": \"John Doe\",\n" +
@@ -110,7 +110,7 @@ public interface DefaultContent {
             "    \"birth_year\": 1990,\n" +
             "    \"degree\": \"Informatica\",\n" +
             "    \"photoPath\": \"\",\n" +
-            "    \"gender\": \"Masculino\"\n" +
+            "    \"gender\": \"Hombre\"\n" +
             "  },\n" +
             "  {\n" +
             "    \"name\": \"Jane Doe\",\n" +
@@ -119,7 +119,7 @@ public interface DefaultContent {
             "    \"birth_year\": 1992,\n" +
             "    \"degree\": \"A.D.E.\",\n" +
             "    \"photoPath\": \"\",\n" +
-            "    \"gender\": \"Femenino\"\n" +
+            "    \"gender\": \"Mujer\"\n" +
             "  },\n" +
             "  {\n" +
             "    \"name\": \"Bruce Wayne\",\n" +
@@ -128,7 +128,7 @@ public interface DefaultContent {
             "    \"birth_year\": 1939,\n" +
             "    \"degree\": \"Electronica\",\n" +
             "    \"photoPath\": \"\",\n" +
-            "    \"gender\": \"Masculino\"\n" +
+            "    \"gender\": \"Hombre\"\n" +
             "  },\n" +
             "  {\n" +
             "    \"name\": \"Mary Jane Watson\",\n" +
@@ -137,7 +137,7 @@ public interface DefaultContent {
             "    \"birth_year\": 1986,\n" +
             "    \"degree\": \"Animacion\",\n" +
             "    \"photoPath\": \"\",\n" +
-            "    \"gender\": \"Masculino\"\n" +
+            "    \"gender\": \"Mujer\"\n" +
             "  }\n" +
             "]";
     String default_exams = "[\n" +

@@ -15,6 +15,8 @@ import com.stunny.vogel.campusvirtual.R;
 
 public class SubjectsActivity extends AppCompatActivity {
 
+    private SubjectAdapter s;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,7 @@ public class SubjectsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logo);
 
-        SubjectAdapter s = new SubjectAdapter(getApplicationContext(), SubjectsActivity.this);
+        s = new SubjectAdapter(getApplicationContext(), SubjectsActivity.this);
         ListView l = (ListView) findViewById(R.id.subjectList);
         l.setAdapter(s);
     }
@@ -58,5 +60,11 @@ public class SubjectsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        s.notifyDataSetChanged();
     }
 }
