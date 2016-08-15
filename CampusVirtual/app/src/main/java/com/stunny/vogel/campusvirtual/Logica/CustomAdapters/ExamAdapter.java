@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.stunny.vogel.campusvirtual.Actividades.AddEditExam;
+import com.stunny.vogel.campusvirtual.Actividades.Add.AddEditExam;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
@@ -95,7 +95,8 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
         TextView date = (TextView)row.findViewById(R.id.exam_fecha),
                 hora = (TextView)row.findViewById(R.id.exam_hora),
                 asig = (TextView)row.findViewById(R.id.exam_subject),
-                aula = (TextView)row.findViewById(R.id.exam_aula);
+                aula = (TextView)row.findViewById(R.id.exam_aula),
+                students = (TextView)row.findViewById(R.id.exam_students);
 
         DateFormat form = new SimpleDateFormat("HH:mm");
         String hour = form.format(dHora);
@@ -107,6 +108,13 @@ public class ExamAdapter extends ArrayAdapter<Exam> {
         date.setText(fecha);
         asig.setText("Asignatura: "+subj);
         aula.setText(room);
+
+        int qSts = fm.examStudentsCount(subj, getContext());
+        if(qSts == 1) students.setText("1 alumno");
+        else{
+            students.setText(R.string.students);
+            students.setText(Integer.toString(qSts)+" "+students.getText().toString());
+        }
 
         return row;
     }

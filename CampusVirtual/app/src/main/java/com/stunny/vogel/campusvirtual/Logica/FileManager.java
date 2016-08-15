@@ -76,7 +76,7 @@ public class FileManager {
     public List<Subject> fillSubjects(List<Subject> elements, Context context){
 
         Subject aux;
-        JsonObject obj;
+        JsonObject obj, stn, sthm;
 
         try {
             JsonArray subjects = extract(context.getFilesDir() + "/subjects.json");
@@ -84,11 +84,24 @@ public class FileManager {
                 aux = new Subject();
                 obj = (JsonObject) subjects.get(i);
 
+                aux.students = new ArrayList<>();
+                aux.themes = new ArrayList<>();
+
                 aux.name = obj.get("name").getAsString();
                 Log.d("Nombre", aux.name);
                 aux.iconPath = obj.get("iconPath").getAsString();
                 aux.description = obj.get("descripcion").getAsString();
 
+                JsonArray students = (JsonArray)obj.get("students"),
+                            themes = (JsonArray)obj.get("themes");
+                for(int j = 0; j<students.size(); j++){
+                    stn = (JsonObject)students.get(j);
+                    aux.students.add(stn.get("student_name").getAsString());
+                }
+                for(int k = 0; k<themes.size(); k++){
+                    sthm = (JsonObject)themes.get(k);
+                    aux.themes.add(sthm.get("theme_name").getAsString());
+                }
                 elements.add(aux);
             }
 
@@ -104,7 +117,7 @@ public class FileManager {
         Exam aux;
         JsonObject obj;
 
-        try{
+        try {
 
             JsonArray exams = extract(context.getFilesDir() + "/exams.json");
             for(int i = 0; i<exams.size(); i++){
@@ -131,6 +144,26 @@ public class FileManager {
         }
 
         return elements;
+    }
+    public int examStudentsCount(String subject, Context context){
+        int count = 0;
+
+        JsonObject aux;
+        JsonArray stAux;
+        try{
+            JsonArray subjects = extract(context.getFilesDir() + "/subjects.json");
+            for(int i = 0; i<subjects.size(); i++){
+                aux = (JsonObject) subjects.get(i);
+                if(aux.get("name").getAsString().equals(subject)) {
+                    stAux = (JsonArray) aux.get("students");
+                    count = stAux.size();
+                }
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return count;
     }
     public List<Student> fillStudents(List<Student> elements, Context context){
 
@@ -162,6 +195,45 @@ public class FileManager {
 
         return elements;
     }
+    public List<Student> fillStudents(List<Student> elements, ArrayList<String> names, Context context){
+
+        List<Student> aux = new ArrayList<>();
+        aux = fillStudents(aux, context);
+        for(int i = 0; i<names.size(); i++){
+            for(int j=0; j<aux.size(); j++){
+                if(aux.get(j).name.equals(names.get(i))){
+                    elements.add(aux.get(j));
+                }
+            }
+        }
+
+        return elements;
+    }
+    public ArrayList<String> findStudentSubjects(String name, Context context){
+        ArrayList<String> rSubjs = new ArrayList<>();
+        JsonObject aux, nAux;
+        JsonArray sAux;
+        try {
+            JsonArray subjects = extract(context.getFilesDir()+"/subjects.json");
+
+            for(int i = 0; i<subjects.size(); i++){
+                aux = (JsonObject)subjects.get(i);
+                sAux = (JsonArray)aux.get("students");
+                for(int j = 0; j<sAux.size(); j++){
+                    nAux = (JsonObject) sAux.get(j);
+                    if(name.equals(nAux.get("student_name").getAsString())){
+                        rSubjs.add(aux.get("name").getAsString());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
+        return rSubjs;
+    }
     public void removeSubject(Subject s, Context context){
         try {
             Log.d("remove", "subject");
@@ -181,15 +253,18 @@ public class FileManager {
         }
 
     }
+    public void removeSubject(String subjName, Context context){
+
+    }
     public void removeStudent(Student s, Context context){
         try{
             JsonArray students = extract(context.getFilesDir()+"/students.json");
             JsonObject aux;
             for (int i = 0; i<students.size(); i++){
                 aux = (JsonObject)students.get(i);
-                if(aux.get("name").getAsString().equals(s.name)){
+                if(aux.get("name").getAsString().equals(s.name)
+                        &&aux.get("gender").getAsString().equals(s.gender)){
                     students.remove(i);
-                    reWrite(students, context.getFilesDir()+"/students.json");
                     break;
                 }
             }
@@ -205,6 +280,9 @@ public class FileManager {
             JsonObject aux;
             for(int i = 0; i<students.size(); i++){
                 aux = (JsonObject)students.get(i);
+                if(aux.get("name").equals(s.name) && aux.get("gender").equals(s.gender)){
+                    ex = true;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

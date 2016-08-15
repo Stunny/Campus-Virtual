@@ -36,14 +36,14 @@
                 android:layout_gravity="start"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:id="@+id/titulo_asignatura" />
             <TextView
                 android:textAlignment="textStart"
                 android:layout_gravity="start"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:maxLines="2"

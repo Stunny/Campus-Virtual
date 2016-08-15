@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:layout_gravity="start"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:id="@+id/exam_aula"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                 android:textAlignment="viewEnd"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:textColor="#000"/>
+                android:textColor="@color/black"/>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -2,6 +2,7 @@
     <string name="app_name">Digital Campus</string>
     <string name="title_activity_login">Log In</string>
     <string name="save">Guardar</string>
+    <string name="delete">Borrar</string>
     <!-- User login data -->
     <string name="user_email">administrador@salleurl.edu</string>
     <string name="user_password">123qwe</string>
@@ -30,11 +31,18 @@
     <string name="trash">&#xf014;</string>
     <string name="add">&#xf196;</string>
     <!--Gestion de asignaturas-->
+    <string name="subjects">Asignaturas</string>
+    <string name="info">Informacion Basica</string>
+    <string name="sbst">Alumnos inscritos</string>
+    <string name="themes">Temario</string>
+    <string name="sbview">Ver asignatura</string>
     <string name="subjectMenu">Gestion asignaturas</string>
     <string name="addElement">Nuevo Elemento</string>
     <string name="sbform">Nueva Asignatura</string>
     <string name="selectSubject">Selecciona una asignatura</string>
     <!--Gestion de alumnos-->
+    <string name="students">alumnos</string>
+    <string name="stview">Ver Alumno</string>
     <string name="stform">Nuevo alumno</string>
     <string name="selectStudent">Selecciona un alumno</string>
     <string name="studentMenu">Gestion alumnos</string>

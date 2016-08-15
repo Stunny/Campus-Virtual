@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.stunny.vogel.campusvirtual.Actividades.Views.ViewSubject;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Subject;
 import com.stunny.vogel.campusvirtual.R;
@@ -33,9 +34,11 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
     private File subjectsFile;
     private FileManager fm;
     private Activity activityRef;
+    private Context c;
 
     public SubjectAdapter(Context context, Activity ref){
         super(context, R.layout.subject);
+        this.c = context;
         this.activityRef = ref;
         this.fm = new FileManager();
         this.elements = new ArrayList<Subject>();
@@ -77,8 +80,14 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent();
-                    //startActivity(i); Go to subject page
+                    Intent i = new Intent(c, ViewSubject.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("name",elements.get(position).name);
+                    i.putExtra("descrip", elements.get(position).description);
+                    i.putExtra("iconPath", elements.get(position).iconPath);
+                    i.putExtra("students", elements.get(position).students);
+                    i.putExtra("themes", elements.get(position).themes);
+                    c.startActivity(i);
                 }
             });
         }
