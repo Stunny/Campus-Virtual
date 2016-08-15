@@ -82,6 +82,11 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
                 public void onClick(View v) {
                     Intent i = new Intent(c, ViewSubject.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("name",elements.get(position).name);
+                    i.putExtra("descrip", elements.get(position).description);
+                    i.putExtra("iconPath", elements.get(position).iconPath);
+                    i.putExtra("students", elements.get(position).students);
+                    i.putExtra("themes", elements.get(position).themes);
                     c.startActivity(i);
                 }
             });

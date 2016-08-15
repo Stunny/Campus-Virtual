@@ -12,12 +12,12 @@ public interface DefaultContent {
             "    \"descripcion\": \"Nociones y teoría acerca de la fotografia.\",\n" +
             "    \"iconPath\": \"\",\n" +
             "    \"themes\":[\n" +
-            "      {\"theme_name\": \"Planos\"},\n" +
-            "      {\"theme_name\": \"Tipos de cámara\"},\n" +
-            "      {\"theme_name\": \"Historia\"},\n" +
-            "      {\"theme_name\": \"Lentes\"},\n" +
-            "      {\"theme_name\": \"ISO\"},\n" +
-            "      {\"theme_name\": \"Exposicion\"}\n" +
+            "      {\"theme_name\": \"1. Planos\"},\n" +
+            "      {\"theme_name\": \"2. Tipos de cámara\"},\n" +
+            "      {\"theme_name\": \"3. Historia\"},\n" +
+            "      {\"theme_name\": \"4. Lentes\"},\n" +
+            "      {\"theme_name\": \"5. ISO\"},\n" +
+            "      {\"theme_name\": \"6. Exposicion\"}\n" +
             "    ],\n" +
             "    \"students\": [\n" +
             "      {\"student_name\": \"Mary Jane Watson\"},\n" +
@@ -29,12 +29,12 @@ public interface DefaultContent {
             "    \"descripcion\": \"Fundamentos basicos y avanzados acerca de la programación de aplicaciones para el SO Android.\",\n" +
             "    \"iconPath\": \"\",\n" +
             "    \"themes\":[\n" +
-            "      {\"theme_name\": \"Layouts\"},\n" +
-            "      {\"theme_name\": \"Navegacion\"},\n" +
-            "      {\"theme_name\": \"Fragmentacion\"},\n" +
-            "      {\"theme_name\": \"Componentes visuales\"},\n" +
-            "      {\"theme_name\": \"Debugging\"},\n" +
-            "      {\"theme_name\": \"APK building\"}\n" +
+            "      {\"theme_name\": \"1. Layouts\"},\n" +
+            "      {\"theme_name\": \"2. Navegacion\"},\n" +
+            "      {\"theme_name\": \"3. Fragmentacion\"},\n" +
+            "      {\"theme_name\": \"4. Componentes visuales\"},\n" +
+            "      {\"theme_name\": \"5. Debugging\"},\n" +
+            "      {\"theme_name\": \"6. APK building\"}\n" +
             "    ],\n" +
             "    \"students\": [\n" +
             "      {\"student_name\": \"Bruce Wayne\"},\n" +
@@ -46,12 +46,12 @@ public interface DefaultContent {
             "    \"descripcion\": \"Diseño y programación orientados a objetos con Java.\",\n" +
             "    \"iconPath\": \"\",\n" +
             "    \"themes\":[\n" +
-            "      {\"theme_name\": \"Orientación a objetos\"},\n" +
-            "      {\"theme_name\": \"MVC\"},\n" +
-            "      {\"theme_name\": \"AWT/Swing\"},\n" +
-            "      {\"theme_name\": \"Subprocesamiento multiple\"},\n" +
-            "      {\"theme_name\": \"Interconexión mediante sockets\"},\n" +
-            "      {\"theme_name\": \"Excepciones\"}\n" +
+            "      {\"theme_name\": \"1. Orientación a objetos\"},\n" +
+            "      {\"theme_name\": \"2. MVC\"},\n" +
+            "      {\"theme_name\": \"3. AWT/Swing\"},\n" +
+            "      {\"theme_name\": \"4. Subprocesamiento multiple\"},\n" +
+            "      {\"theme_name\": \"5. Interconexión mediante sockets\"},\n" +
+            "      {\"theme_name\": \"6. Excepciones\"}\n" +
             "    ],\n" +
             "    \"students\": [\n" +
             "      {\"student_name\": \"Jane Doe\"},\n" +
@@ -63,12 +63,12 @@ public interface DefaultContent {
             "    \"descripcion\": \"Iniciación a la programación con el lenguaje C.\",\n" +
             "    \"iconPath\": \"\",\n" +
             "    \"themes\":[\n" +
-            "      {\"theme_name\": \"Pseudocodigo\"},\n" +
-            "      {\"theme_name\": \"Diagramas\"},\n" +
-            "      {\"theme_name\": \"C basico\"},\n" +
-            "      {\"theme_name\": \"Programacion estructurada\"},\n" +
-            "      {\"theme_name\": \"Memoria dinamica\"},\n" +
-            "      {\"theme_name\": \"Recursividad\"}\n" +
+            "      {\"theme_name\": \"1. Pseudocodigo\"},\n" +
+            "      {\"theme_name\": \"2. Diagramas\"},\n" +
+            "      {\"theme_name\": \"3. C basico\"},\n" +
+            "      {\"theme_name\": \"4. Programacion estructurada\"},\n" +
+            "      {\"theme_name\": \"5. Memoria dinamica\"},\n" +
+            "      {\"theme_name\": \"6. Recursividad\"}\n" +
             "    ],\n" +
             "    \"students\": [\n" +
             "      {\"student_name\": \"Bruce Wayne\"},\n" +
@@ -80,12 +80,12 @@ public interface DefaultContent {
             "    \"descripcion\": \"Diseño e implementación de bases de datos con el SGBD MySQL.\",\n" +
             "    \"iconPath\": \"\",\n" +
             "    \"themes\":[\n" +
-            "      {\"theme_name\": \"Modelo E:R\"},\n" +
-            "      {\"theme_name\": \"Modelo Relacional\"},\n" +
-            "      {\"theme_name\": \"Modelo fisico\"},\n" +
-            "      {\"theme_name\": \"Seguridad\"},\n" +
-            "      {\"theme_name\": \"Procedimientos\"},\n" +
-            "      {\"theme_name\": \"Concurrencia\"}\n" +
+            "      {\"theme_name\": \"1. Modelo E:R\"},\n" +
+            "      {\"theme_name\": \"2. Modelo Relacional\"},\n" +
+            "      {\"theme_name\": \"3. Modelo fisico\"},\n" +
+            "      {\"theme_name\": \"4. Seguridad\"},\n" +
+            "      {\"theme_name\": \"5. Procedimientos\"},\n" +
+            "      {\"theme_name\": \"6. Concurrencia\"}\n" +
             "    ],\n" +
             "    \"students\": [\n" +
             "      {\"student_name\": \"Slade Wilson\"},\n" +

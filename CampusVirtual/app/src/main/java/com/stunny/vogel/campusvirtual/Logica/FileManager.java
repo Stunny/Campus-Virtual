@@ -76,7 +76,7 @@ public class FileManager {
     public List<Subject> fillSubjects(List<Subject> elements, Context context){
 
         Subject aux;
-        JsonObject obj;
+        JsonObject obj, stn, sthm;
 
         try {
             JsonArray subjects = extract(context.getFilesDir() + "/subjects.json");
@@ -84,11 +84,24 @@ public class FileManager {
                 aux = new Subject();
                 obj = (JsonObject) subjects.get(i);
 
+                aux.students = new ArrayList<>();
+                aux.themes = new ArrayList<>();
+
                 aux.name = obj.get("name").getAsString();
                 Log.d("Nombre", aux.name);
                 aux.iconPath = obj.get("iconPath").getAsString();
                 aux.description = obj.get("descripcion").getAsString();
 
+                JsonArray students = (JsonArray)obj.get("students"),
+                            themes = (JsonArray)obj.get("themes");
+                for(int j = 0; j<students.size(); j++){
+                    stn = (JsonObject)students.get(j);
+                    aux.students.add(stn.get("student_name").getAsString());
+                }
+                for(int k = 0; k<themes.size(); k++){
+                    sthm = (JsonObject)themes.get(k);
+                    aux.themes.add(sthm.get("theme_name").getAsString());
+                }
                 elements.add(aux);
             }
 
@@ -104,7 +117,7 @@ public class FileManager {
         Exam aux;
         JsonObject obj;
 
-        try{
+        try {
 
             JsonArray exams = extract(context.getFilesDir() + "/exams.json");
             for(int i = 0; i<exams.size(); i++){
@@ -158,6 +171,20 @@ public class FileManager {
         }catch(IOException ie){
             ie.printStackTrace();
             return null;
+        }
+
+        return elements;
+    }
+    public List<Student> fillStudents(List<Student> elements, ArrayList<String> names, Context context){
+
+        List<Student> aux = new ArrayList<>();
+        aux = fillStudents(aux, context);
+        for(int i = 0; i<names.size(); i++){
+            for(int j=0; j<aux.size(); j++){
+                if(aux.get(j).name.equals(names.get(i))){
+                    elements.add(aux.get(j));
+                }
+            }
         }
 
         return elements;

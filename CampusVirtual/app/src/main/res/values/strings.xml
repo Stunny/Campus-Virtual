@@ -31,6 +31,9 @@
     <string name="trash">&#xf014;</string>
     <string name="add">&#xf196;</string>
     <!--Gestion de asignaturas-->
+    <string name="info">Informacion Basica</string>
+    <string name="sbst">Alumnos inscritos</string>
+    <string name="themes">Temario</string>
     <string name="sbview">Ver asignatura</string>
     <string name="subjectMenu">Gestion asignaturas</string>
     <string name="addElement">Nuevo Elemento</string>
