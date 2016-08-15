@@ -41,6 +41,7 @@
     <string name="sbform">Nueva Asignatura</string>
     <string name="selectSubject">Selecciona una asignatura</string>
     <!--Gestion de alumnos-->
+    <string name="students">alumnos</string>
     <string name="stview">Ver Alumno</string>
     <string name="stform">Nuevo alumno</string>
     <string name="selectStudent">Selecciona un alumno</string>

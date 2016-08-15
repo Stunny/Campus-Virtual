@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.stunny.vogel.campusvirtual.Actividades.ViewStudent;
+import com.stunny.vogel.campusvirtual.Actividades.Views.ViewStudent;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
 import com.stunny.vogel.campusvirtual.R;

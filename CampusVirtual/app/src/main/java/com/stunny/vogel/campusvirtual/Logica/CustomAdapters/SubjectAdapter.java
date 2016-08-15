@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.stunny.vogel.campusvirtual.Actividades.ViewSubject;
+import com.stunny.vogel.campusvirtual.Actividades.Views.ViewSubject;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Subject;
 import com.stunny.vogel.campusvirtual.R;

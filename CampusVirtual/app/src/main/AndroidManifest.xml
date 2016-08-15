@@ -42,18 +42,18 @@
             android:parentActivityName=".Actividades.MainMenuActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Actividades.AddStudent"
+            android:name=".Actividades.Add.AddStudent"
             android:parentActivityName=".Actividades.StudentsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Actividades.AddEditExam"
+            android:name=".Actividades.Add.AddEditExam"
             android:parentActivityName=".Actividades.ExamsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Actividades.ViewSubject"
+            android:name=".Actividades.Views.ViewSubject"
             android:parentActivityName=".Actividades.SubjectsActivity" />
         <activity
-            android:name=".Actividades.ViewStudent"
+            android:name=".Actividades.Views.ViewStudent"
             android:parentActivityName=".Actividades.StudentsActivity"/>
 
         <meta-data

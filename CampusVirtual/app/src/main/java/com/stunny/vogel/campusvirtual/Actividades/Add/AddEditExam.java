@@ -1,4 +1,4 @@
-package com.stunny.vogel.campusvirtual.Actividades;
+package com.stunny.vogel.campusvirtual.Actividades.Add;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,11 +21,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.stunny.vogel.campusvirtual.Actividades.ExamsActivity;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.R;
 
-import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;

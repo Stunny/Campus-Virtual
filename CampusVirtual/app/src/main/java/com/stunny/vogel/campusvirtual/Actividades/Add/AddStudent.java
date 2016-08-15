@@ -1,4 +1,4 @@
-package com.stunny.vogel.campusvirtual.Actividades;
+package com.stunny.vogel.campusvirtual.Actividades.Add;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -12,7 +12,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -36,6 +35,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.stunny.vogel.campusvirtual.Actividades.StudentsActivity;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Student;
 import com.stunny.vogel.campusvirtual.R;
@@ -47,7 +47,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -160,11 +159,6 @@ public class AddStudent extends AppCompatActivity {
         });
     }
     private void launchSelectPhotoIntent(){
-        /*final File arr = new File(Environment.getExternalStorageDirectory()+File.separator+"dCampusIMG"+File.separator);
-        arr.mkdirs();
-        final String _imgName = "img_"+System.currentTimeMillis()+".jpg";
-        final File _imgDir = new File(arr, _imgName);
-        outputURI = Uri.fromFile(_imgDir);*/
 
         try{
             outputFile = File.createTempFile("tmp", ".jpg", getCacheDir());
@@ -184,7 +178,6 @@ public class AddStudent extends AppCompatActivity {
             final Intent i = new Intent(captureIntent);
             i.setComponent(new ComponentName(ri.activityInfo.packageName, ri.activityInfo.name));
             i.setPackage(packname);
-            //i.putExtra(MediaStore.EXTRA_OUTPUT, outputURI);
             cameraIntents.add(i);
         }
 

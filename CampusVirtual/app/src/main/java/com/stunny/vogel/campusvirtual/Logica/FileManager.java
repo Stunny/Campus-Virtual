@@ -145,6 +145,26 @@ public class FileManager {
 
         return elements;
     }
+    public int examStudentsCount(String subject, Context context){
+        int count = 0;
+
+        JsonObject aux;
+        JsonArray stAux;
+        try{
+            JsonArray subjects = extract(context.getFilesDir() + "/subjects.json");
+            for(int i = 0; i<subjects.size(); i++){
+                aux = (JsonObject) subjects.get(i);
+                if(aux.get("name").getAsString().equals(subject)) {
+                    stAux = (JsonArray) aux.get("students");
+                    count = stAux.size();
+                }
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return count;
+    }
     public List<Student> fillStudents(List<Student> elements, Context context){
 
         Student aux;
@@ -242,9 +262,9 @@ public class FileManager {
             JsonObject aux;
             for (int i = 0; i<students.size(); i++){
                 aux = (JsonObject)students.get(i);
-                if(aux.get("name").getAsString().equals(s.name)){
+                if(aux.get("name").getAsString().equals(s.name)
+                        &&aux.get("gender").getAsString().equals(s.gender)){
                     students.remove(i);
-                    reWrite(students, context.getFilesDir()+"/students.json");
                     break;
                 }
             }
@@ -260,6 +280,9 @@ public class FileManager {
             JsonObject aux;
             for(int i = 0; i<students.size(); i++){
                 aux = (JsonObject)students.get(i);
+                if(aux.get("name").equals(s.name) && aux.get("gender").equals(s.gender)){
+                    ex = true;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

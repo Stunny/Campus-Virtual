@@ -1,4 +1,4 @@
-package com.stunny.vogel.campusvirtual.Actividades;
+package com.stunny.vogel.campusvirtual.Actividades.Views;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -12,13 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.stunny.vogel.campusvirtual.Logica.CustomAdapters.SimpleStudentAdapter;
 import com.stunny.vogel.campusvirtual.Logica.FileManager;
-import com.stunny.vogel.campusvirtual.Logica.ListElements.Exam;
 import com.stunny.vogel.campusvirtual.Logica.ListElements.Subject;
 import com.stunny.vogel.campusvirtual.R;
 

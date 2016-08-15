@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.stunny.vogel.campusvirtual.Actividades.Add.AddEditExam;
+import com.stunny.vogel.campusvirtual.Actividades.Add.AddStudent;
 import com.stunny.vogel.campusvirtual.Logica.FontManager;
 import com.stunny.vogel.campusvirtual.R;
 

@@ -1,5 +1,5 @@
 
-package com.stunny.vogel.campusvirtual.Actividades;
+package com.stunny.vogel.campusvirtual.Actividades.Views;
 
 import android.app.ActionBar;
 import android.net.Uri;
